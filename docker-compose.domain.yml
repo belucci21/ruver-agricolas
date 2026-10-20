@@ -1,0 +1,31 @@
+services:
+  gateway:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    configs:
+      - source: ruver_caddyfile
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+configs:
+  ruver_caddyfile:
+    content: |
+      ruver-agricolas.com {
+        reverse_proxy host.docker.internal:8088
+      }
+
+      www.ruver-agricolas.com {
+        redir https://ruver-agricolas.com{uri} permanent
+      }
+
+volumes:
+  caddy_data:
+  caddy_config:

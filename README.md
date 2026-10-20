@@ -20,6 +20,20 @@ https://raw.githubusercontent.com/belucci21/ruver-agricolas/main/docker-compose.
 
 Nombre del proyecto: `ruver`. El contenedor compila React y sirve la web con Nginx en el puerto **8088** del VPS. `RUVER_PORT` permite cambiarlo si ese puerto está ocupado. El contenedor funciona sin usuario root.
 
+### Dominio ruver-agricolas.com y HTTPS
+
+El dominio principal apunta por registro A a `187.126.5.248`; `www` es un CNAME hacia `ruver-agricolas.com`.
+
+El proyecto Docker separado `ruver-domain` publica HTTPS con Caddy, certificados automáticos persistentes y redirección de HTTP a HTTPS. `www` redirige al dominio principal conservando la ruta. El proxy envía las solicitudes al puerto 8088 de la web y no accede al socket de Docker.
+
+Archivo para desplegar el proxy desde Docker Manager:
+
+```text
+https://raw.githubusercontent.com/belucci21/ruver-agricolas/main/docker-compose.domain.yml
+```
+
+Requiere puertos 80 y 443 libres y DNS apuntando al VPS. Mantener los volúmenes `caddy_data` y `caddy_config` para conservar certificados y configuración. Si cambia el puerto de la web, actualizar también el destino del proxy en este archivo.
+
 El despliegue usa el código de `main` como contexto Git remoto. No necesita tokens ni secretos en el archivo Compose. Para actualizarlo después de cambiar el código, reconstruir el proyecto desde Docker Manager. El dominio y HTTPS se configuran en el proxy del VPS; el despliegue del contenedor no crea un dominio ni un certificado automáticamente.
 
 Guía oficial: https://www.hostinger.com/support/12040815-how-to-deploy-your-first-container-with-hostinger-docker-manager/
