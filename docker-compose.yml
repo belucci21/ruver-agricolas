@@ -1,0 +1,8 @@
+services:
+  ruver:
+    build:
+      context: https://github.com/belucci21/ruver-agricolas.git#main
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${RUVER_PORT:-8088}:8080"
