@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({ plugins: [react()], base: './' });
+// La base absoluta permite servir rutas legales (/terminos, /privacidad, /cookies)
+// reutilizadas por el fallback a index.html de nginx.
+export default defineConfig({ plugins: [react()], base: '/' });

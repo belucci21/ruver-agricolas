@@ -1,3 +1,6 @@
+import { PAGES } from './routes.js';
+import { clearConsent, CONSENT_EVENT } from './consent.js';
+
 export function Hero({onQuote = () => {}}) { return (<section id="inicio" className="s8 section-inicio">
 <div className="s9">
 <div className="s10">
@@ -264,9 +267,16 @@ export function Irrigation({onQuote = () => {}}) { return (<section id="cintas" 
 </div>
 </section>); }
 
-export function Footer({onQuote = () => {}}) { return (<footer className="s104">
+export function Footer({ path = '' }) { return (<footer className="s104">
 <div className="s105">
+<div className="footer-brand">
 <span>Insumos Agrícolas RUVER</span>
-<span>Mallas agrícolas, bandejas almacigueras y cintas de riego</span>
+<span className="footer-detail">Mallas agrícolas, bandejas almacigueras y cintas de riego</span>
+<span className="footer-detail">Insuagri Ruver SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Chile</span>
+</div>
+<nav className="footer-legal" aria-label="Documentos legales">
+{PAGES.map(page => <a key={page.path} href={page.path} className={page.path === path ? 'is-selected' : ''}>{page.full}</a>)}
+<button type="button" className="footer-legal-button" onClick={() => { clearConsent(); window.dispatchEvent(new CustomEvent(CONSENT_EVENT)); }}>Ajustes de cookies</button>
+</nav>
 </div>
 </footer>); }

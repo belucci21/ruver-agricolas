@@ -112,6 +112,7 @@ export default function Order() {
           <details className="panel bank-details"><summary><span className="step-dot">3</span> Transferencia bancaria <span aria-hidden="true">+</span></summary>
             <dl>{[['Titular','Insuagri Ruver SpA'],['RUT','77.872.414-6'],['Banco','Banco Santander'],['Tipo de cuenta','Cuenta corriente'],['N.º de cuenta','000037266493'],['Correo',business.email]].map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
             <button type="button" className="button button-outline" onClick={async () => setBankNotice(await copyText(bankText) ? 'Datos bancarios copiados.' : 'No se pudieron copiar. Puedes seleccionarlos y copiarlos manualmente.')}>Copiar datos bancarios</button><p role="status" className="small">{bankNotice}</p>
+            <p className="small muted">En el <strong>motivo</strong> de la transferencia escribe tu referencia ({cart.length ? code : 'RUVER-…'} o el número de cotización) para identificar tu pago.</p>
             <p className="small muted">Envía el comprobante por WhatsApp o al correo para despachar tu pedido.</p>
           </details>
         </div>
