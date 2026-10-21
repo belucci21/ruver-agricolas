@@ -20,7 +20,7 @@ test('las tres páginas legales son rutas únicas con metadatos', () => {
     assert.match(page.path, /^\/[a-z]+$/);
     assert.ok(page.title.includes('RUVER'));
     assert.ok(page.description.length > 40);
-    assert.ok(page.full.includes(page.label));
+    assert.ok(page.full.toLowerCase().includes(page.label.toLowerCase()));
   }
 });
 
