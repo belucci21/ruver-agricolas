@@ -74,7 +74,7 @@ export function Terms() {
       </> },
       { heading: '4. Formas de pago', body: <>
         <P><strong>Webpay:</strong> pago con tarjeta de débito o crédito en la plataforma de Transbank. El enlace del sitio no completa automáticamente el monto: puedes copiarlo con un clic e ingresarlo en el formulario de Webpay. La transacción ocurre íntegramente en Transbank; nunca recibimos ni almacenamos datos de tarjetas.</P>
-        <P><strong>Transferencia bancaria:</strong> desde cualquier banco a la cuenta corriente de Insuagri Ruver SpA en Banco Santander, N.º de cuenta 000037266493. Te recomendamos indicar en el motivo de la transferencia tu referencia (por ejemplo, RUVER-1234 o el número de la cotización) para identificar tu pago con rapidez.</P>
+        <P><strong>Transferencia bancaria:</strong> puedes pagar por transferencia a la cuenta de Insuagri Ruver SpA; los datos bancarios completos aparecen en la sección «Formas de pago» de este sitio. Te recomendamos indicar en el motivo de la transferencia tu referencia (por ejemplo, RUVER-1234 o el número de la cotización) para identificar tu pago con rapidez.</P>
         <P>Al pagar una cotización, ingresa su número y el total con IVA indicado en el PDF; si el monto pagado no coincide con la cotización, te contactamos antes de despachar.</P>
       </> },
       { heading: '5. Confirmación del pago y entrega', body: <>
