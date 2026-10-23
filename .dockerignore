@@ -4,3 +4,6 @@ dist
 .env
 .env.*
 CONTEXT.md
+.prerender
+tmp
+output

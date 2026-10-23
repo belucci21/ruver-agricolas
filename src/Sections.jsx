@@ -4,14 +4,14 @@ import { clearConsent, CONSENT_EVENT } from './consent.js';
 export function Hero({onQuote = () => {}}) { return (<section id="inicio" className="s8 section-inicio">
 <div className="s9">
 <div className="s10">
-<h1 className="s11">Calidad que protege tu cultivo</h1>
+<h1 className="s11">Insumos agrícolas en Quillota para proteger tu cultivo</h1>
 <p className="s12">Mallas agrícolas, bandejas almacigueras y cintas de riego. Pide tu cotización por WhatsApp y te respondemos con precio y disponibilidad.</p>
 <div className="s13">
 <a href="#contacto" className="s14" onClick={() => onQuote("")}>Pedir cotización</a>
 <a href="#mallas" className="s15">Ver productos</a>
 </div>
 <div className="s16">
-<span>Entregas inmediatas</span>
+<span>Disponibilidad por confirmar</span>
 <span>Despacho a todo Chile</span>
 </div>
 </div>

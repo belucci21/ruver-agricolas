@@ -13,11 +13,11 @@ function stubStorage() {
   };
 }
 
-test('las tres páginas legales son rutas únicas con metadatos', () => {
-  assert.equal(PAGES.length, 3);
-  assert.deepEqual([...new Set(PAGES.map(page => page.path))], ['/terminos', '/privacidad', '/cookies']);
+test('las cuatro páginas legales son rutas únicas con metadatos', () => {
+  assert.equal(PAGES.length, 4);
+  assert.deepEqual([...new Set(PAGES.map(page => page.path))], ['/terminos', '/privacidad', '/cookies', '/envios-y-devoluciones']);
   for (const page of PAGES) {
-    assert.match(page.path, /^\/[a-z]+$/);
+    assert.match(page.path, /^\/[a-z-]+$/);
     assert.ok(page.title.includes('RUVER'));
     assert.ok(page.description.length > 40);
     assert.ok(page.full.toLowerCase().includes(page.label.toLowerCase()));
@@ -58,4 +58,13 @@ test('el consentimiento aceptado carga las fuentes una sola vez', () => {
 
 test('la clave del consentimiento cambia junto con la versión', () => {
   assert.equal(STORAGE_KEY, 'ruver-consent-v1');
+});
+import { removeFonts } from '../src/consent.js';
+test('rechazar o retirar consentimiento elimina los tres enlaces opcionales', () => {
+ let removed=0;
+ removeFonts({querySelectorAll:()=>Array.from({length:3},()=>({remove(){removed++;}}))});
+ assert.equal(removed,3);
+});
+test('bloquear almacenamiento no impide guardar la decisión durante la visita',()=>{
+ assert.equal(writeConsent('denied',{setItem(){throw new Error('blocked');}}),'denied');
 });

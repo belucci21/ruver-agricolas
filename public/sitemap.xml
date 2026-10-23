@@ -1,27 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ruver-agricolas.com/</loc>
-    <lastmod>2026-10-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://ruver-agricolas.com/terminos</loc>
-    <lastmod>2026-10-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://ruver-agricolas.com/privacidad</loc>
-    <lastmod>2026-10-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://ruver-agricolas.com/cookies</loc>
-    <lastmod>2026-10-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://ruver-agricolas.com/</loc></url><url><loc>https://ruver-agricolas.com/malla-antiafido</loc></url><url><loc>https://ruver-agricolas.com/malla-raschel</loc></url><url><loc>https://ruver-agricolas.com/malla-antimaleza</loc></url><url><loc>https://ruver-agricolas.com/malla-antihelada</loc></url><url><loc>https://ruver-agricolas.com/bandejas-almacigueras</loc></url><url><loc>https://ruver-agricolas.com/cintas-de-riego</loc></url><url><loc>https://ruver-agricolas.com/terminos</loc></url><url><loc>https://ruver-agricolas.com/privacidad</loc></url><url><loc>https://ruver-agricolas.com/cookies</loc></url><url><loc>https://ruver-agricolas.com/envios-y-devoluciones</loc></url></urlset>

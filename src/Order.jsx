@@ -29,7 +29,8 @@ function PaymentLink({ amount, description, children }) {
 }
 
 export default function Order() {
-  const [order, setOrder] = useState(loadOrder);
+  const [order, setOrder] = useState({ code: '', cart: [] });
+  const [loaded, setLoaded] = useState(false);
   const [selected, setSelected] = useState(0);
   const [quantity, setQuantity] = useState('1');
   const [notice, setNotice] = useState('');
@@ -43,10 +44,12 @@ export default function Order() {
   const quoteReady = quoteNumber.trim().length > 0 && amount > 0;
   const quoteMessage = `Hola, pagué la cotización N.º ${quoteNumber.trim()} por ${money(amount)} con Webpay.\nAdjunto el PDF de la cotización y el comprobante de pago.`;
   const bankText = 'Titular: Insuagri Ruver SpA\nRUT: 77.872.414-6\nBanco: Santander\nTipo de cuenta: Cuenta corriente\nN.º de cuenta: 000037266493\nCorreo: insumosruver@gmail.com';
+  useEffect(() => { setOrder(loadOrder()); setLoaded(true); }, []);
   useEffect(() => {
+    if (!loaded) return;
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(order)); setStorageError(false); }
     catch { setStorageError(true); }
-  }, [order]);
+  }, [order, loaded]);
   function add(event) {
     event.preventDefault();
     if (!validQuantity(quantity)) { setNotice(`Ingresa una cantidad entera entre 1 y ${MAX_QUANTITY}.`); return; }

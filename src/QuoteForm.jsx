@@ -45,6 +45,7 @@ export default function QuoteForm({ product, setProduct }) {
         <button className="button button-green" type="submit" value="whatsapp">Enviar por WhatsApp <span aria-hidden="true">↗</span></button>
         <button className="button button-outline" type="submit" value="email">Cotizar por correo</button>
         <p className="muted small">Se abre WhatsApp o tu aplicación de correo con el mensaje escrito. Revisa y confirma el envío allí.</p>
+        <p className="muted small">Usamos tus datos para atender esta solicitud. Consulta la <a href="/privacidad">política de privacidad</a> y las <a href="/envios-y-devoluciones">condiciones de envío y devolución</a>.</p>
         <div role="status" aria-live="polite">{status && <p className="notice">{status} {name.trim() && detail.trim() && <a target="_blank" rel="noopener noreferrer" href={whatsappLink(message)}>Abrir WhatsApp</a>}</p>}</div>
       </form>
     </div>

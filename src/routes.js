@@ -23,14 +23,19 @@ export const PAGES = [
     title: 'Política de cookies | Insumos Agrícolas RUVER',
     description: 'Insumos Agrícolas RUVER no usa cookies de seguimiento: revisa el almacenamiento local del carrito, las fuentes de Google y los servicios externos de pago.',
   },
+  {
+    path: '/envios-y-devoluciones', label: 'Envíos', full: 'Envíos y devoluciones',
+    title: 'Envíos y devoluciones | RUVER',
+    description: 'Consulta cómo coordinamos el despacho de insumos agrícolas en Chile, el costo del flete, la garantía legal y las devoluciones.',
+  },
 ];
 
 // Titulares por defecto (página de inicio). Deben coincidir con index.html.
 export const DEFAULT_META = {
-  title: 'Insumos Agrícolas RUVER | Mallas agrícolas, bandejas almacigueras y cintas de riego',
+  title: 'Insumos agrícolas en Quillota | Mallas y riego RUVER',
   description: 'Mallas antiáfido, raschel, antimaleza y antihelada, bandejas almacigueras y cintas de riego. Despacho a todo Chile.',
   image: `${SITE_URL}/images/0914ad0ee180.jpg`,
 };
 
 // Actualización visible de los documentos legales.
-export const LEGAL_UPDATED = 'octubre de 2026';
+export const LEGAL_UPDATED = '23 de octubre de 2026';

@@ -6,3 +6,6 @@ dist/
 *.local
 .DS_Store
 CONTEXT.md
+.prerender/
+tmp/
+output/

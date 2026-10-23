@@ -1,167 +1,54 @@
-﻿import { useEffect, Fragment } from 'react';
+import { Fragment } from 'react';
 import { business } from './config.js';
-import { whatsappLink } from './links.js';
-import { PAGES, SITE_URL, LEGAL_UPDATED } from './routes.js';
-
-// Atajos de contenido: elementos frecuentes en estos documentos.
+import { LEGAL_UPDATED } from './routes.js';
 const P = props => <p className="legal-p" {...props} />;
-const LI = props => <li {...props} />;
-const Link = props => <a {...props} />;
-const CONTACT = { phone: '+56 9 8731 6764' };
-
-function useHead({ title, description, path }) {
-  useEffect(() => {
-    document.title = title;
-    const set = (query, attribute, value) => {
-      const element = document.head.querySelector(query);
-      if (element) element.setAttribute(attribute, value);
-    };
-    set('meta[name="description"]', 'content', description);
-    set('link[rel="canonical"]', 'href', `${SITE_URL}${path}`);
-    set('meta[property="og:title"]', 'content', title);
-    set('meta[property="og:description"]', 'content', description);
-    set('meta[property="og:url"]', 'content', `${SITE_URL}${path}`);
-    set('meta[name="twitter:title"]', 'content', title);
-    set('meta[name="twitter:description"]', 'content', description);
-  }, [title, description, path]);
+const email = <a href={`mailto:${business.email}`}>{business.email}</a>;
+const identity = 'INSUAGRI RUVER SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Región de Valparaíso, Chile';
+function LegalLayout({ title, intro, sections }) {
+  return <article className="legal-page"><div className="legal-hero"><div className="container">
+    <p className="legal-kicker">Insumos Agrícolas RUVER</p><h1>{title}</h1>
+    <p className="legal-intro">{intro}</p><p className="small muted">Actualizado: {LEGAL_UPDATED}</p>
+  </div></div><div className="container legal-body">
+    <nav className="panel legal-toc" aria-label="Contenido del documento"><strong>Contenido</strong><ol>{sections.map((s,i) => <li key={s.heading}><a href={`#legal-${i}`}>{s.heading.replace(/^\d+\.\s*/, '')}</a></li>)}</ol></nav>
+    {sections.map((s,i) => <Fragment key={s.heading}><h2 id={`legal-${i}`}>{s.heading}</h2>{s.body}</Fragment>)}
+    <div className="panel legal-contact"><h2>Contacto</h2><P>{identity}.</P><P>{email} · <a href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noopener noreferrer">+56 9 8731 6764</a></P></div>
+  </div></article>;
 }
-
-function LegalLayout({ page, title, intro, sections }) {
-  useHead({ title: page.title, description: page.description, path: page.path });
-  return <article className="legal-page">
-    <div className="legal-hero">
-      <div className="container">
-        <p className="legal-kicker">Insumos Agrícolas RUVER</p>
-        <h1>{title}</h1>
-        <p className="legal-intro">{intro}</p>
-        <p className="small muted legal-date">Última actualización: {LEGAL_UPDATED}</p>
-      </div>
-    </div>
-    <div className="container legal-body">
-      <nav className="panel legal-toc" aria-label="Contenido del documento">
-        <strong>En este documento</strong>
-        <ol>{sections.map((section, index) => <li key={index}><a href={`#legal-${index}`}>{section.heading}</a></li>)}</ol>
-      </nav>
-      {sections.map((section, index) => <Fragment key={index}>
-        <h2 id={`legal-${index}`}>{section.heading}</h2>
-        {section.body}
-      </Fragment>)}
-      <div className="panel legal-contact">
-        <h3>Contacto</h3>
-        <P>Insuagri Ruver SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Región de Valparaíso.</P>
-        <P><Link href={whatsappLink('Hola, tengo una consulta sobre el sitio de Insumos Agrícolas RUVER.')} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.phone}</Link> · <Link href={`mailto:${business.email}`}>{business.email}</Link></P>
-      </div>
-    </div>
-  </article>;
-}
-
 export function Terms() {
-  return <LegalLayout title="Términos y condiciones"
-    intro="Estas condiciones regulan la compra de insumos agrícolas a través de este sitio web. Al armar un pedido o pagar, declaras que las leíste y las aceptas."
-    sections={[
-      { heading: '1. Quién vende', body: <>
-        <P>El sitio y la venta de productos corresponden a <strong>Insuagri Ruver SpA</strong>, RUT 77.872.414-6, con domicilio en Av. San Isidro 21H, comuna de Quillota, Región de Valparaíso, Chile. Atiende de lunes a viernes de 9:00 a 17:30 h por WhatsApp {CONTACT.phone} y por el correo {business.email}.</P>
-      </> },
-      { heading: '2. Catálogo, precios e IVA', body: <>
-        <P>Los precios se publican en pesos chilenos y corresponden a la venta al detalle, más IVA (19 %), salvo que se indique lo contrario. El precio de cada producto no incluye el flete: el valor del despacho se confirma según la zona y la dirección de entrega.</P>
-        <P>Los precios, medidas, presentaciones y stock disponibles pueden variar sin aviso previo. Las fotos y características publicadas son referenciales del formato del producto.</P>
-      </> },
-      { heading: '3. Cómo se arma y se confirma un pedido', body: <>
-        <LI>Agregas productos al carrito y el sitio calcula neto, IVA y total.</LI>
-        <LI>Confirmas y nos envías el pedido por WhatsApp o correo con tu referencia (por ejemplo, RUVER-1234), la dirección de despacho y tus datos de contacto.</LI>
-        <LI>Nosotros revisamos disponibilidad, flete y precio final, y te escribimos para confirmar costos y plazo.</LI>
-        <LI>El pedido queda registrado solo cuando responds esa confirmación. La referencia del carrito sirve para identificar la conversación; no es una orden registrada en un servidor.</LI>
-      </> },
-      { heading: '4. Formas de pago', body: <>
-        <P><strong>Webpay:</strong> pago con tarjeta de débito o crédito en la plataforma de Transbank. El enlace del sitio no completa automáticamente el monto: puedes copiarlo con un clic e ingresarlo en el formulario de Webpay. La transacción ocurre íntegramente en Transbank; nunca recibimos ni almacenamos datos de tarjetas.</P>
-        <P><strong>Transferencia bancaria:</strong> puedes pagar por transferencia a la cuenta de Insuagri Ruver SpA; los datos bancarios completos aparecen en la sección «Formas de pago» de este sitio. Te recomendamos indicar en el motivo de la transferencia tu referencia (por ejemplo, RUVER-1234 o el número de la cotización) para identificar tu pago con rapidez.</P>
-        <P>Al pagar una cotización, ingresa su número y el total con IVA indicado en el PDF; si el monto pagado no coincide con la cotización, te contactamos antes de despachar.</P>
-      </> },
-      { heading: '5. Confirmación del pago y entrega', body: <>
-        <P>El sitio no verifica pagos automáticamente: revisamos el comprobante (Webpay o transferencia) antes de despachar. Confirmado el pago y acordado el flete, coordinamos la entrega con la dirección escrita en tu mensaje. Si necesitas factura electrónica, pídela con el RUT y el giro de tu empresa en la misma conversación.</P>
-      </> },
-      { heading: '6. Derecho a retractarse', body: <>
-        <P>Si compraste en este sitio sin negociar el pedido en una tienda física, puedes retractarte de la compra dentro de los <strong>10 días siguientes a la recepción del producto</strong> (Ley N.º 19.496 sobre Protección de los Derechos de los Consumidores, modificada por la Ley N.º 21.723), siempre que podamos reponer el producto y lo devuelvas con su embalaje original y la boleta o factura. Reembolsamos el dinero dentro del mismo plazo de 10 días. También puedes pedir la reposición del producto con desperfectos.</P>
-        <P>El retracto no aplica a pedidos despachados con medidas especiales ni a encargos confeccionados según tus especificaciones.</P>
-      </> },
-      { heading: '7. Garantía', body: <>
-        <P>Los productos cuentan con garantía legal de 90 días para fallas de fabricación o desperfectos manifiestos al momento de la entrega o dentro del plazo. La garantía legal es independiente de cualquier garantía voluntaria que informemos en cada cotización o conversación.</P>
-      </> },
-      { heading: '8. Ley aplicable y fiscalización', body: <>
-        <P>Estas condiciones se rigen por las leyes de Chile. Puedes presentar reclamos ante el Servicio Nacional del Consumidor (SERNAC) o ante los tribunales que correspondan según la ley. Las dudas sobre este documento se resuelven en la conversación de tu pedido.</P>
-      </> },
-    ]} />;
+  return <LegalLayout title="Términos y condiciones" intro="Información de venta, pago y derechos de las personas consumidoras. Armar un carrito es una solicitud: antes de pagar, confirma con RUVER el stock, el total y la entrega." sections={[
+    {heading:'1. Identificación del proveedor',body:<><P>{identity}. Contacto: {email} y WhatsApp +56 9 8731 6764. Horario de atención: lunes a viernes, 9:00 a 17:30 h.</P><P>El sitio permite consultar el catálogo y preparar mensajes de cotización o pedido, sin crear una cuenta de usuario.</P></>},
+    {heading:'2. Precios, disponibilidad y confirmación',body:<><P>Los precios están expresados en pesos chilenos (CLP). El catálogo distingue precios netos y el carrito suma IVA del 19 %. Las páginas de cada familia muestran también el precio con IVA. El flete se cotiza por separado y debe informarse antes de contratar y pagar.</P><P>Las imágenes ilustran el uso de los productos. Confirma la ficha, medida y presentación que necesitas. RUVER verifica disponibilidad, descuentos aplicables y condiciones de entrega; no se garantiza stock en tiempo real.</P><P>Enviar el carrito no confirma una venta ni genera una orden en un servidor. Solicita una confirmación escrita con productos, cantidades, impuestos, flete, importe final y fecha o plazo de entrega. Se respetan las condiciones de la venta confirmada y los derechos que establece la ley.</P></>},
+    {heading:'3. Pago y documentos tributarios',body:<><P>Webpay abre una plataforma externa de Transbank. El sitio permite copiar el monto, pero no lo rellena ni comprueba el pago automáticamente. Introduce el monto acordado y la referencia del pedido o cotización; RUVER revisa el comprobante antes de despachar. El sitio no solicita datos de tarjeta.</P><P>También puedes pagar mediante transferencia utilizando los datos comerciales publicados en «Pedido y pago». Confirma el total y la disponibilidad antes de transferir. Si necesitas factura, indica RUT, razón social, giro y demás datos necesarios para emitirla.</P></>},
+    {heading:'4. Despachos',body:<P>Coordinamos envíos a Chile según destino, cobertura y características de la carga. El costo del flete y el plazo se acuerdan por escrito antes del pago. No ofrecemos un plazo uniforme ni entrega inmediata para todos los productos. Consulta <a href="/envios-y-devoluciones">envíos y devoluciones</a>.</P>},
+    {heading:'5. Derecho a retracto',body:<><P>Cuando corresponda conforme a la Ley N.º 19.496, puedes retractarte de una compra a distancia dentro de los <strong>10 días desde la recepción del producto, antes de utilizarlo</strong>. Si no se remite la confirmación escrita exigida por ley, el plazo se extiende a 90 días. Escríbenos indicando la compra y tu decisión para coordinar la devolución.</P><P>Las exclusiones permitidas por ley, como bienes confeccionados conforme a especificaciones del consumidor, deben informarse expresa y previamente cuando sean aplicables. No todos los productos quedan excluidos por ser agrícolas. Una exclusión del retracto no elimina la garantía legal por defectos.</P><P>Deben restituirse en buen estado los elementos originales del embalaje conforme a la ley. La devolución del dinero se efectúa a la mayor brevedad posible, sin retención de gastos y antes de 45 días desde la comunicación del retracto, en los términos legales.</P></>},
+    {heading:'6. Garantía legal',body:<><P>Los productos nuevos cuentan con <strong>garantía legal de seis meses</strong> desde su recepción en los supuestos de falla o incumplimiento previstos por la ley. La persona consumidora puede elegir reparación gratuita, cambio o devolución del dinero, según corresponda. Presenta un comprobante que acredite la compra; conservar la caja original no es un requisito para ejercer esta garantía.</P><P>El desgaste normal o los daños por uso indebido no equivalen por sí solos a una falla cubierta. Cualquier garantía voluntaria adicional debe informarse expresamente y no reduce los derechos legales.</P></>},
+    {heading:'7. Consultas y reclamaciones',body:<P>Contacta con {email} o nuestro WhatsApp para resolver incidencias. Se aplica la legislación chilena, incluida la Ley N.º 19.496 cuando corresponda. Puedes acudir a <a href="https://www.sernac.cl/" target="_blank" rel="noopener noreferrer">SERNAC</a> y a los tribunales competentes. Estas condiciones no limitan derechos irrenunciables.</P>},
+  ]}/>;
 }
-
 export function Privacy() {
-  return <LegalLayout title="Política de privacidad"
-    intro="Este sitio no registra cuentas ni guarda tus datos en un servidor. Esta política explica qué información te pedimos, para qué la usamos y cómo ejercer tus derechos."
-    sections={[
-      { heading: '1. Responsable del tratamiento', body: <>
-        <P>Los datos compartidos al usar este sitio son tratados por <strong>Insuagri Ruver SpA</strong>, RUT 77.872.414-6, responsable del tratamiento. Para consultas de privacidad escribe a {business.email}.</P>
-      </> },
-      { heading: '2. Qué datos recolectamos', body: <>
-        <LI><strong>Datos que compartes voluntariamente:</strong> al cotizar, confirmar un pedido o enviar un comprobante de pago compartes por WhatsApp o correo datos como nombre, teléfono, correo, dirección de despacho, documentos y el detalle de los productos. Este sitio web no pide registro de usuarios ni envía formularios a un servidor.</LI>
-        <LI><strong>Datos del navegador (solo locales):</strong> el carrito y la preferencia de cookies se guardan en el almacenamiento local de tu navegador (localStorage) y no llegan a ningún servidor propio. Los detalles están en la política de cookies.</LI>
-        <LI><strong>Datos del pago:</strong> si pagas con Webpay, la información de la tarjeta la procesa Transbank conforme a sus propias políticas; nosotros solo revisamos el comprobante que nos envías.</LI>
-      </> },
-      { heading: '3. Para qué usamos los datos', body: <>
-        <P>Usamos la información compartida para responder cotizaciones, preparar tu pedido, coordinar el flete y el despacho, emitir boleta o factura, resolver reclamos y mantener el historial de tu relación comercial como cliente. No la usamos para publicidad ni para crear perfiles de comportamiento.</P>
-      </> },
-      { heading: '4. Con quién compartimos los datos', body: <>
-        <P>No vendemos ni arrendamos tus datos. Solo los compartimos cuando es necesario para ejecutar tu pedido o cumplir una obligación legal:</P>
-        <LI><strong>Transbank:</strong> para tramitar el pago dentro de Webpay, cuando la transacción ocurre en su plataforma.</LI>
-        <LI><strong>Operadores de despacho:</strong> distribuidoras o transportistas, con los datos mínimos para la entrega.</LI>
-        <LI><strong>Servicio de Impuestos Internos:</strong> en el contexto de la facturación electrónica.</LI>
-        <LI><strong>Plataformas de comunicación que elijas:</strong> WhatsApp y tu proveedor de correo, que aplican sus propias políticas y están fuera de nuestro control.</LI>
-      </> },
-      { heading: '5. Conservación', body: <>
-        <P>Conservamos la información compartida por WhatsApp o el correo durante el tiempo necesario para atender tu pedido y mantener la historia comercial. El almacenamiento local del carrito permanece en tu navegador hasta que lo borres o vacíes el carrito. Si solicitas borrar la información, eliminamos los datos personales que correspondan, salvo los que debamos conservar por ley.</P>
-      </> },
-      { heading: '6. Tus derechos', body: <>
-        <P>Puedes ejercer los derechos de acceso, actualización o rectificación de tus datos, y solicitar su cancelación u oposición a tratamientos determinados, conforme a la Ley N.º 19.628 sobre Protección de la Vida Privada. Desde el 1 de diciembre de 2026 también aplica la Ley N.º 21.719, que crea la Agencia de Protección de Datos Personales y refuerza estos derechos.</P>
-        <P>Para ejercerlos escribe a {business.email} o por WhatsApp al {CONTACT.phone} con la solicitud y la información que permita identificar tus datos.</P>
-      </> },
-      { heading: '7. Seguridad y servicios externos', body: <>
-        <P>Trabajamos con canales de mensajería con cifrado como WhatsApp, aunque ninguna transmisión es absolutamente segura: evita enviar datos que no sean necesarios para comprar (por ejemplo, no envíes fotos de tu tarjeta).</P>
-        <P>El pago con Webpay y el despacho dependen de terceros (Transbank, operadores de despacho), conforme a sus propias normativas de seguridad y privacidad.</P>
-      </> },
-      { heading: '8. Menores de edad', body: <>
-        <P>Este sitio se dirige a compradores agrícolas mayores de 18 años. Si descubrimos datos de un menor tratados sin autorización, los eliminamos a la brevedad.</P>
-      </> },
-      { heading: '9. Cambios en esta política', body: <>
-        <P>Esta política se actualizó en {LEGAL_UPDATED}. Si la modificamos, publicaremos la nueva versión en esta dirección con su fecha de vigencia.</P>
-      </> },
-    ]} />;
+  return <LegalLayout title="Política de privacidad" intro="Explicamos qué datos intervienen al navegar, pedir una cotización y coordinar una compra con RUVER." sections={[
+    {heading:'1. Responsable y contacto',body:<P>El responsable es {identity}. Puedes dirigir consultas y solicitudes sobre tus datos a {email}.</P>},
+    {heading:'2. Datos que intervienen',body:<ul><li>El formulario usa el nombre, producto y detalle que escribes para preparar un mensaje. No se envía a un formulario de servidor de RUVER. Al abrir WhatsApp, el texto se incorpora al enlace de ese servicio; en correo se entrega a tu aplicación. Revisa el mensaje y confirma el envío allí.</li><li>En la conversación comercial puedes compartir teléfono, correo, dirección, RUT, datos de facturación y comprobantes necesarios para atender el pedido. No envíes números completos de tarjeta ni datos innecesarios.</li><li>El carrito y la referencia del pedido se guardan en tu navegador. Su contenido se comparte con la plataforma de comunicación cuando eliges abrir el mensaje del pedido.</li><li>El alojamiento de la web puede tratar información técnica de las solicitudes, como IP, fecha, recurso solicitado y navegador, para servir y proteger el sitio. No es lo mismo que el contenido del formulario.</li><li>Google Fonts recibe solicitudes de fuentes solo si aceptas su carga opcional. No se han integrado Google Analytics ni píxeles publicitarios en esta versión.</li></ul>},
+    {heading:'3. Finalidades',body:<P>Atendemos solicitudes voluntarias, preparamos cotizaciones, coordinamos pagos y entregas, emitimos documentos tributarios y gestionamos garantías o reclamos. Se usa la información necesaria para estas finalidades y para cumplir obligaciones legales. El formulario no incorpora una suscripción publicitaria.</P>},
+    {heading:'4. Proveedores y servicios externos',body:<><P>El sitio está alojado mediante Hostinger. WhatsApp (Meta), los proveedores de correo y Google Fonts, cuando lo aceptas, pueden tratar datos al utilizar sus servicios. Webpay/Transbank procesa el pago en su propia plataforma; la web de RUVER no recoge datos de tarjeta.</P><P>Para ejecutar la compra pueden comunicarse los datos necesarios a transportistas y, para facturar o cumplir obligaciones, a los organismos correspondientes. Algunos proveedores tecnológicos pueden tratar datos fuera de Chile según sus condiciones. Consulta sus políticas al usar esos servicios: <a href="https://www.whatsapp.com/legal/privacy-policy">WhatsApp</a>, <a href="https://policies.google.com/privacy">Google</a> y <a href="https://www.hostinger.com/legal/privacy-policy">Hostinger</a>.</P></>},
+    {heading:'5. Conservación y seguridad',body:<><P>Los datos de las conversaciones y pedidos se conservan durante el tiempo necesario para atender la solicitud, ejecutar la compra y resolver incidencias, además de los períodos exigidos por las obligaciones legales aplicables. Puedes solicitar la eliminación cuando corresponda; algunas obligaciones pueden impedirla temporalmente.</P><P>El carrito permanece en localStorage hasta que elimines los datos del sitio. Vaciarlo elimina sus productos, pero puede mantener la referencia del pedido. Las preferencias de fuentes permanecen hasta cambiarlas o borrar los datos. Consulta <a href="/cookies">cookies y almacenamiento local</a>.</P><P>La web usa HTTPS. Limita lo que compartes a lo necesario para la gestión y evita enviar información de tarjetas por mensajería.</P></>},
+    {heading:'6. Derechos y normativa',body:<><P>Conforme a la Ley N.º 19.628 puedes solicitar información sobre tus datos y su tratamiento, su modificación o rectificación y, en los casos previstos, su eliminación o bloqueo y oponerte a usos determinados. Escríbenos a {email}, describe tu solicitud e indica cómo identificar la relación comercial. Solo se solicitará la información necesaria para comprobar identidad y tramitarla.</P><P>La Ley N.º 21.719 entra en vigor el <strong>1 de diciembre de 2026</strong>. Esta versión, fechada antes de su entrada en vigor, debe revisarse para adaptar información, procedimientos y derechos al nuevo régimen. <a href="https://www.bcn.cl/leychile/Navegar?dt=open&idLey=19628">Consulta la normativa en la Biblioteca del Congreso Nacional</a>.</P></>},
+    {heading:'7. Actualizaciones',body:<P>Los cambios se publicarán en esta página con su fecha. Si se incorporan nuevas herramientas de analítica, publicidad o formularios de servidor, se revisará esta política y el mecanismo de preferencias antes de activarlas.</P>},
+  ]}/>;
 }
-
 export function Cookies() {
-  return <LegalLayout title="Política de cookies"
-    intro="Este sitio no usa cookies de seguimiento ni de publicidad: el único almacenamiento que hacemos es el carrito y tu preferencia de cookies, dentro de tu navegador."
-    sections={[
-      { heading: '1. Sin cookies ni seguimiento de terceros', body: <>
-        <P>Este sitio no instala cookies propias de análisis, publicidad o redes sociales, y tampoco contrata seguimiento de terceros mientras navegas. El carrito funciona sin cookies de identificación porque usa herramientas del propio navegador.</P>
-      </> },
-      { heading: '2. Almacenamiento local del navegador (localStorage)', body: <>
-        <P>En lugar de cookies, guardamos dos claves en el almacenamiento local de tu navegador, siempre desde el dominio ruver-agricolas.com:</P>
-        <LI><strong>ruver-order-v1</strong> guarda tu carrito y la referencia del pedido (formato RUVER-…). Permite recuperar el carrito al recargar la página. Se borra si vacías el carrito o limpias los datos del navegador.</LI>
-        <LI><strong>ruver-consent-v1</strong> guarda tu decisión sobre las fuentes de Google (aceptar o rechazar). Se reinicia con el botón «Ajustes de cookies» del pie de página.</LI>
-        <P>Estos datos no salen de tu dispositivo: si cambias de equipo o de navegador, la web vuelve a empezar desde cero.</P>
-      </> },
-      { heading: '3. Fuentes de Google (opcionales)', body: <>
-        <P>Las tipografías del sitio se descargan desde Google Fonts <strong>solo si las aceptas</strong> en el aviso de cookies. Si las rechazas, el sitio completo funciona con fuentes del sistema y Google no recibe solicitudes desde tu visita. Si las aceptas, Google puede registrar en sus servidores la solicitud de las fuentes (por ejemplo, tu dirección IP), conforme a sus políticas de privacidad.</P>
-      </> },
-      { heading: '4. Servicios externos fuera del sitio', body: <>
-        <P>Al continuar la compra en otros servicios, ellos aplican sus propias cookies y políticas; no son parte del site de RUVER:</P>
-        <LI><strong>WhatsApp (wa.me):</strong> al abrir la conversación de cotización, pedido o comprobante.</LI>
-        <LI><strong>Webpay (Transbank):</strong> al abrir la pasarela de pago; allí Transbank administra la información de la tarjeta.</LI>
-        <LI><strong>Tu proveedor de correo:</strong> al abrir la aplicación de correo para enviarnos un mensaje.</LI>
-      </> },
-      { heading: '5. Cómo cambiar tu decisión', body: <>
-        <P>En el pie de cualquier página puedes usar «<strong>Ajustes de cookies</strong>» para volver a elegir entre aceptar o rechazar las fuentes de Google. El rechazo no impide cotizar, armar el pedido ni pagar: el almacenamiento del carrito sigue disponible porque es necesario para el funcionamiento del sitio.</P>
-      </> },
-      { heading: '6. Actualización', body: <>
-        <P>Esta política se actualizó en {LEGAL_UPDATED}. Ante cambios relevantes publicaremos la nueva versión en esta dirección.</P>
-      </> },
-    ]} />;
+  return <LegalLayout title="Política de cookies y almacenamiento" intro="Esta versión no incorpora herramientas de analítica ni publicidad. Usa almacenamiento local para el pedido y permite elegir si se descargan las fuentes de Google." sections={[
+    {heading:'1. Almacenamiento de esta web',body:<><P>localStorage es almacenamiento del navegador, distinto de una cookie. No se envía automáticamente en cada petición HTTP.</P><ul><li><strong>ruver-order-v1:</strong> productos, cantidades y referencia del pedido, para recuperar el carrito. Permanece hasta borrar los datos del sitio. Vaciar el carrito elimina los productos, pero puede mantener la referencia.</li><li><strong>ruver-consent-v1:</strong> decisión sobre las fuentes opcionales (granted o denied). Permanece hasta cambiarla o borrar los datos.</li></ul><P>Si el navegador bloquea el almacenamiento, puedes usar la web, pero el pedido o la preferencia pueden perderse al recargar. El formulario no guarda tus datos de contacto en localStorage.</P></>},
+    {heading:'2. Fuentes opcionales de Google',body:<P>Solo tras aceptar se solicitan tipografías a fonts.googleapis.com y fonts.gstatic.com. Estas solicitudes pueden comunicar a Google la IP y metadatos técnicos. Rechazar conserva las fuentes del sistema y todas las funciones de compra. Esto no activa herramientas de medición o publicidad.</P>},
+    {heading:'3. Cambiar la decisión',body:<P>Usa «Ajustes de cookies» en el pie de página. Al reiniciar la elección se retiran los enlaces de fuentes opcionales; las solicitudes ya efectuadas y los archivos que el navegador haya cacheado no pueden deshacerse. Para borrar el carrito y la preferencia, elimina los datos de ruver-agricolas.com desde la configuración del navegador.</P>},
+    {heading:'4. Enlaces y servicios externos',body:<P>Al abrir WhatsApp, Webpay o tu aplicación de correo se aplican las condiciones y tecnologías de esos servicios. Los registros técnicos del alojamiento se explican en la <a href="/privacidad">política de privacidad</a>. No hay botones sociales con rastreo ni vídeos externos incrustados en esta versión.</P>},
+  ]}/>;
+}
+export function Shipping() {
+  return <LegalLayout title="Envíos y devoluciones" intro="Coordinamos el despacho según tu destino y los productos solicitados. Confirma las condiciones por escrito antes de pagar." sections={[
+    {heading:'1. Cobertura y costo del flete',body:<P>Atendemos desde Quillota y coordinamos despachos a Chile según cobertura del transporte, destino y volumen de la carga. El flete no está incluido en los precios del catálogo. Envía tu comuna, dirección y productos para conocer el costo total y las opciones disponibles.</P>},
+    {heading:'2. Plazos y entrega',body:<P>El plazo depende de la disponibilidad confirmada, preparación y transporte. Solicita una fecha o plazo de entrega y el costo del envío antes de contratar. No se publica un plazo estándar porque todavía debe confirmarse para cada pedido. RUVER revisa el pago y coordina el despacho; informa cualquier incidencia por el canal acordado.</P>},
+    {heading:'3. Recepción e incidencias',body:<P>Comprueba que la cantidad y presentación recibidas corresponden a lo acordado. Si hay daños o faltantes, contacta con {email} o WhatsApp +56 9 8731 6764 indicando la referencia y una descripción. Las fotografías pueden facilitar la gestión, sin limitar los medios legales para acreditar el problema.</P>},
+    {heading:'4. Retracto y garantía',body:<P>Cuando corresponda, las compras a distancia tienen retracto dentro de 10 días desde la recepción, antes del uso, y los productos nuevos con fallas tienen garantía legal de seis meses en los supuestos legales. Revisa requisitos, excepciones y opciones en los <a href="/terminos">términos y condiciones</a>. Contacta antes de enviar una devolución para coordinar la recepción; esta coordinación no limita tus derechos.</P>},
+  ]}/>;
 }

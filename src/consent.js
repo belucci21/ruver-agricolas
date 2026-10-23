@@ -15,7 +15,8 @@ export function readConsent(storage = globalThis.localStorage) {
 export function writeConsent(value, storage = globalThis.localStorage) {
   const approved = VALID[value];
   if (!approved) return null;
-  try { storage.setItem(STORAGE_KEY, approved); return approved; } catch { return null; }
+  try { storage.setItem(STORAGE_KEY, approved); } catch { /* Se conserva la decisión durante esta visita. */ }
+  return approved;
 }
 
 export function clearConsent(storage = globalThis.localStorage) {
@@ -40,4 +41,8 @@ export function injectFonts(document = globalThis.document) {
     document.head.append(link);
   }
   return true;
+}
+
+export function removeFonts(document = globalThis.document) {
+  document?.querySelectorAll('link[data-ruver-fonts]').forEach(link => link.remove());
 }
