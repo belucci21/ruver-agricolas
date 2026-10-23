@@ -77,3 +77,28 @@ Guía oficial: https://www.hostinger.com/support/how-to-deploy-apps-built-with-c
 - `tests/order.test.js`: cálculos y entradas inválidas.
 
 El HTML original de Downloads no se modifica.
+
+## SEO y documentos legales (23 de octubre de 2026)
+
+La compilación genera 11 páginas con contenido HTML, título, descripción,
+canonical y datos estructurados propios: inicio, seis familias del catálogo y
+términos, privacidad, cookies y envíos/devoluciones. Genera también robots.txt,
+sitemap.xml y 404.html. Nginx sirve las rutas existentes y responde 404 para
+las demás. No sustituir esta configuración por un fallback general a la portada.
+
+Para verificar: `npm test` ejecuta 13 pruebas de lógica; `npm run build` compila,
+genera las páginas y ejecuta dos comprobaciones del HTML y del sitemap. Para
+revisar los archivos estáticos localmente puede usarse `python -m http.server
+4174 --directory dist`; el servidor de preview de Vite puede aplicar su fallback
+SPA a rutas sin barra final y entregar la portada durante las pruebas.
+
+Después de publicar código hay que reconstruir la imagen, no solo reiniciar el
+contenedor. En el VPS actual: `docker compose -f /docker/ruver/docker-compose.yml
+build ruver`, y tras una compilación correcta `docker compose -f
+/docker/ruver/docker-compose.yml up -d ruver`. Comprobar robots, sitemap y una
+ruta inexistente en el dominio antes de dar la publicación por terminada.
+
+El informe editable está en `docs/seo/informe-seo-ruver-2026-10-23.md`. Search
+Console, el perfil de Google y la analítica requieren configuración adicional.
+No se han añadido rastreadores. Falta confirmar el nombre del representante
+legal y documentar los plazos operativos antes de ampliar las condiciones.
