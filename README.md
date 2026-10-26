@@ -34,7 +34,7 @@ https://raw.githubusercontent.com/belucci21/ruver-agricolas/main/docker-compose.
 
 Requiere puertos 80 y 443 libres y DNS apuntando al VPS. Mantener los volúmenes `caddy_data` y `caddy_config` para conservar certificados y configuración. Si cambia el puerto de la web, actualizar también el destino del proxy en este archivo.
 
-El despliegue usa el código de `main` como contexto Git remoto. No necesita tokens ni secretos en el archivo Compose. Para actualizarlo después de cambiar el código, reconstruir el proyecto desde Docker Manager. El dominio y HTTPS se configuran en el proxy del VPS; el despliegue del contenedor no crea un dominio ni un certificado automáticamente.
+El despliegue usa el código de `main` como contexto Git remoto. No fijar SHA de commit cortos en el `context` del compose: BuildKit no los resuelve y el build falla en segundos. No necesita tokens ni secretos en el archivo Compose. Para actualizarlo después de cambiar el código hay que compilar la imagen de nuevo (build) y luego recrear el contenedor; el botón «Implementar» del Docker Manager solo re-crea el contenedor con la imagen existente. El dominio y HTTPS se configuran en el proxy del VPS; el despliegue del contenedor no crea un dominio ni un certificado automáticamente.
 
 Guía oficial: https://www.hostinger.com/support/12040815-how-to-deploy-your-first-container-with-hostinger-docker-manager/
 
@@ -69,6 +69,8 @@ Guía oficial: https://www.hostinger.com/support/how-to-deploy-apps-built-with-c
 
 - `src/App.jsx`: página y navegación.
 - `src/Sections.jsx`: contenido comercial conservado.
+- `src/blog.js` y `src/Blog.jsx`: índice y guías del blog.
+- `scripts/prerender.mjs`: HTML estático, sitemap y robots por ruta.
 - `src/catalog.json`: variantes y precios del catálogo.
 - `src/Order.jsx`, `src/order.js`: carrito, totales y pagos externos.
 - `src/QuoteForm.jsx`: formulario de cotización.
@@ -80,23 +82,33 @@ El HTML original de Downloads no se modifica.
 
 ## SEO y documentos legales (23 de octubre de 2026)
 
-La compilación genera 11 páginas con contenido HTML, título, descripción,
-canonical y datos estructurados propios: inicio, seis familias del catálogo y
-términos, privacidad, cookies y envíos/devoluciones. Genera también robots.txt,
+La compilación genera 16 páginas con contenido HTML, título, descripción,
+canonical y datos estructurados propios: inicio, seis familias del catálogo, el
+índice del blog y cuatro guías de compra, además de los legales términos,
+privacidad, cookies y envíos/devoluciones. Genera también robots.txt,
 sitemap.xml y 404.html. Nginx sirve las rutas existentes y responde 404 para
 las demás. No sustituir esta configuración por un fallback general a la portada.
 
-Para verificar: `npm test` ejecuta 13 pruebas de lógica; `npm run build` compila,
-genera las páginas y ejecuta dos comprobaciones del HTML y del sitemap. Para
+Para verificar: `npm test` ejecuta las pruebas de lógica; `npm run build` compila,
+genera las páginas y ejecuta dos comprobaciones del HTML y del sitemap. El blog
+se compone en `src/blog.js` (datos) y `src/Blog.jsx` (vistas); `scripts/
+prerender.mjs` incorpora índice y guías al HTML estático y al sitemap. Para
 revisar los archivos estáticos localmente puede usarse `python -m http.server
 4174 --directory dist`; el servidor de preview de Vite puede aplicar su fallback
 SPA a rutas sin barra final y entregar la portada durante las pruebas.
 
-Después de publicar código hay que reconstruir la imagen, no solo reiniciar el
-contenedor. En el VPS actual: `docker compose -f /docker/ruver/docker-compose.yml
-build ruver`, y tras una compilación correcta `docker compose -f
-/docker/ruver/docker-compose.yml up -d ruver`. Comprobar robots, sitemap y una
-ruta inexistente en el dominio antes de dar la publicación por terminada.
+Publicar una nueva guía del blog: 1) agregar el objeto con ruta, título, bajada,
+fecha y categoría en `src/blog.js`; 2) actualizar el conteo de páginas en
+`tests/prerender.test.mjs`; 3) empujar a `main`; 4) en el VPS, compilar la
+imagen y recrear el servicio; 5) comprobar en el dominio que la guía responde
+200 con H1 propio y que el sitemap incluye la nueva URL.
+
+Después de publicar código hay que compilar la imagen (build), no basta
+reiniciar el contenedor ni usar solo «Implementar» del Docker Manager (re-crea
+la misma imagen). En el VPS actual: `docker compose -f
+/docker/ruver/docker-compose.yml build ruver`, y tras una compilación correcta
+`docker compose -f /docker/ruver/docker-compose.yml up -d ruver`. No fijar SHA
+cortos en `context` del compose (el fetch de BuildKit no los resuelve).
 
 El informe editable está en `docs/seo/informe-seo-ruver-2026-10-23.md`. Search
 Console, el perfil de Google y la analítica requieren configuración adicional.
