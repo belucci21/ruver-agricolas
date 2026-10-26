@@ -108,7 +108,7 @@
 <div class="pv"></div>
 <div class="sheet">
   <div class="seccion"><span class="chip">01</span><h2>Verificación técnica HTTP (26 de octubre)</h2></div>
-  <p>Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de octubre (tras el rebuild definitivo, que incluyó la guía de antimaleza), con <span class="mono">Cache-Control: no-cache</span>:</p>
+  <p>Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de octubre (tras el rebuild definitivo, que incluyó la guía de antimaleza), con <span class="mono">Cache-Control: no-cache</span>. Las filas de QA integral se midieron por la tarde sobre las 17 URLs listadas en el sitemap:</p>
   <table class="data">
     <tr><th style="width:38%">Comprobación</th><th>Resultado</th></tr>
     <tr><td><span class="mono">/blog</span> (índice)</td><td>200, HTML prerrenderizado con H1 propio («Guías para elegir insumos agrícolas»)</td></tr>
@@ -121,6 +121,8 @@
     <tr><td>Páginas legales (4)</td><td>200</td></tr>
     <tr><td><span class="mono">sitemap.xml</span></td><td>200, XML con 17 URLs (<span class="mono">&lt;loc&gt;</span> medidos por expresión regular sobre la línea única del XML; <span class="mono">grep -c</span> cuenta líneas completas y no sirve para contarlas)</td></tr>
     <tr><td><span class="mono">robots.txt</span></td><td>200, texto plano, enlaza el sitemap</td></tr>
+    <tr><td>QA integral de metadatos (17 URLs)</td><td>17/17 correctas: títulos y descripciones únicos (sin duplicados), canonical idéntico a cada URL, un H1 por página y <span class="mono">&lt;meta name="robots"&gt;</span> con <span class="mono">index, follow</span></td></tr>
+    <tr><td>QA integral de marcado</td><td>Open Graph completo en las 17 (título, descripción, <span class="mono">og:url</span> e <span class="mono">og:image</span>, imagen JPEG verificada: 200, 49 KB) y JSON-LD válido: Store+WebSite en todas; CollectionPage + BreadcrumbList en las 6 categorías; Blog en el índice; WebPage + BlogPosting + BreadcrumbList (3 elementos) en las 5 guías</td></tr>
     <tr><td>Ruta inexistente</td><td>404 con página propia (<span class="mono">noindex, follow</span>)</td></tr>
     <tr><td>Puerto interno 8088</td><td>Coincide con el servido por el dominio (Caddy → 8088)</td></tr>
     <tr><td>Fonts</td><td>Solo se cargan tras aceptar cookies; el HTML prerrenderizado no depende de Google Fonts</td></tr>

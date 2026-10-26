@@ -37,7 +37,7 @@ Auditoría de código, compilación y respuestas HTTP del dominio; revisión de 
 
 ## 01 | Verificación técnica HTTP (26 de octubre)
 
-Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de octubre (tras el rebuild definitivo, que incluyó la guía de antimaleza), con `Cache-Control: no-cache`:
+Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de octubre (tras el rebuild definitivo, que incluyó la guía de antimaleza), con `Cache-Control: no-cache`. Las filas de QA integral se midieron por la tarde sobre las 17 URLs listadas en el sitemap:
 
 | Comprobación | Resultado |
 | --- | --- |
@@ -51,6 +51,8 @@ Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de
 | Páginas legales (4) | 200 |
 | `sitemap.xml` | 200, XML con 17 URLs (`<loc>` medidos por expresión regular sobre la línea única del XML; `grep -c` cuenta líneas completas y no sirve para contarlas) |
 | `robots.txt` | 200, texto plano, enlaza el sitemap |
+| QA integral de metadatos (17 URLs) | 17/17 correctas: títulos y descripciones únicos (sin duplicados), canonical idéntico a cada URL, un H1 por página y `<meta name="robots">` con `index, follow` |
+| QA integral de marcado | Open Graph completo en las 17 (título, descripción, `og:url` e `og:image`, imagen JPEG verificada: 200, 49 KB) y JSON-LD válido: Store+WebSite en todas; CollectionPage + BreadcrumbList en las 6 categorías; Blog en el índice; WebPage + BlogPosting + BreadcrumbList (3 elementos) en las 5 guías |
 | Ruta inexistente | 404 con página propia (`noindex, follow`) |
 | Puerto interno 8088 | Coincide con el servi­do por el dominio (Caddy → 8088) |
 | Fonts | Solo se cargan tras aceptar cookies; el HTML prerrenderizado no depende de Google Fonts |
