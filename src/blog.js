@@ -33,7 +33,7 @@ export const BLOG_POSTS = [
         'Los formatos combinan anchos de 2,10 m y 4,20 m con rollos de 50 y 100 metros. En la página de la categoría puedes compararlos con su precio neto y el total con IVA.',
       ] },
       { heading: 'Qué revisar antes de cotizar', paragraphs: [
-        'Mide la superficie a cubrir, define el porcentaje objetivo con who cultiva y revisa la sujeción y los encuentros entre paños. Envíanos el porcentaje, el ancho, el largo y la cantidad de rollos para confirmar disponibilidad y flete antes del pago.',
+        'Mide la superficie a cubrir, define el porcentaje objetivo con quien cultiva y revisa la sujeción y los encuentros entre paños. Envíanos el porcentaje, el ancho, el largo y la cantidad de rollos para confirmar disponibilidad y flete antes del pago.',
       ], list: [
         'Mensaje de ejemplo: «Hola, quiero cotizar malla raschel 65 % verde, 2,10 x 100 m, 4 rollos para Quillota».',
       ] },
