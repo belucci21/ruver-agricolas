@@ -123,6 +123,42 @@ export const BLOG_POSTS = [
       ] },
     ],
   },
+  {
+    path: '/blog/malla-antimaleza-rollos',
+    slug: 'malla-antimaleza-rollos',
+    title: 'Malla antimaleza: cuántos rollos necesitas | Blog RUVER',
+    headline: 'Malla antimaleza: cómo calcular los rollos para tu superficie',
+    description: 'Anchos de 0,70 a 4 metros y largos de 5 a 400 en malla antimaleza RUVER. Cómo calcular la cantidad según superficie, solapes y bordes antes de cotizar.',
+    date: '2026-10-26',
+    dateLabel: '26 de octubre de 2026',
+    category: '/malla-antimaleza',
+    sections: [
+      { heading: 'Qué resuelve la malla antimaleza', paragraphs: [
+        'La malla antimaleza es una barrera física sobre el suelo que reduce la competencia de la maleza alrededor del cultivo. Su resultado depende de la preparación del terreno, la correcta fijación de los paños y el manejo de cultivo; cubre, no elimina el trabajo de deshierbe.',
+      ] },
+      { heading: 'Anchos y largos disponibles', paragraphs: [
+        'El catálogo combina estos anchos y largos en distintos rollos, de modo que el formato se acerque a la geometría del cuadro cultivado:',
+      ], list: [
+        'Anchos de 0,70, 1, 1,20, 1,40, 1,60, 1,80, 2 y 4 metros.',
+        'Largos de 5, 10, 25, 50, 100, 200 y 400 metros.',
+        'Los precios por rollo están en la página de la categoría, con el precio neto junto al total con IVA.',
+      ] },
+      { heading: 'Cálculo paso a paso', paragraphs: [
+        'Primero multiplica el ancho útil por la longitud de la hilera para obtener el área por paño; luego compárala con el área que quieres cubrir. La superficie nominal del rollo no equivale siempre a la cobertura útil: considera los solapes entre paños y los recortes de bordes antes de calcular el número de rollos.',
+      ], list: [
+        'Ejemplo ilustrativo con números redondos: una hilera de 100 metros cubierta con 2 metros de ancho pide un rollo de 2 × 100 m como área base.',
+        'Si el paño debe traslaparse con el vecino, resta ese traslapo de la cobertura efectiva y añade el siguiente rollo según tu puesta en obra.',
+      ] },
+      { heading: 'Montaje y sujeción', paragraphs: [
+        'Nivela el terreno y retira restos vegetales antes de colocar los paños. Fija los bordes al terreno y revisa que los encuentros queden solapados en el sentido que evite el paso de luz y el levantamiento por viento.',
+      ] },
+      { heading: 'Qué enviar para cotizar', paragraphs: [
+        'Indica el ancho y el largo del rollo que encaja con tu cuadro, la cantidad de rollos y tu comuna. Con esos datos confirmamos disponibilidad, flete y plazo antes del pago; el flete se confirma aparte según el destino.',
+      ], list: [
+        'Mensaje de ejemplo: «Hola, quiero cotizar malla antimaleza de 2 × 100 m, 4 rollos, comuna de Quillota».',
+      ] },
+    ],
+  },
 ];
 
 // Utilidades compartidas con la compilación y las pruebas.
