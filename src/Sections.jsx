@@ -1,4 +1,5 @@
 import { PAGES } from './routes.js';
+import { BLOG_INDEX } from './blog.js';
 import { clearConsent, CONSENT_EVENT } from './consent.js';
 
 export function Hero({onQuote = () => {}}) { return (<section id="inicio" className="s8 section-inicio">
@@ -275,6 +276,7 @@ export function Footer({ path = '' }) { return (<footer className="s104">
 <span className="footer-detail">Insuagri Ruver SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Chile</span>
 </div>
 <nav className="footer-legal" aria-label="Documentos legales">
+<a href={BLOG_INDEX.path}>Blog de guías</a>
 {PAGES.map(page => <a key={page.path} href={page.path} className={page.path === path ? 'is-selected' : ''}>{page.full}</a>)}
 <button type="button" className="footer-legal-button" onClick={() => { clearConsent(); window.dispatchEvent(new CustomEvent(CONSENT_EVENT)); }}>Ajustes de cookies</button>
 </nav>

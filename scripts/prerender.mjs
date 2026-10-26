@@ -2,9 +2,10 @@ import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { render } from '../.prerender/entry-server.js';
 import { PAGES, DEFAULT_META, SITE_URL } from '../src/routes.js';
 import { CATEGORIES } from '../src/categories.js';
+import { BLOG_POSTS, BLOG_INDEX } from '../src/blog.js';
 
 const template = await readFile('dist/index.html', 'utf8');
-const pages = [{ ...DEFAULT_META, path: '/' }, ...CATEGORIES, ...PAGES];
+const pages = [{ ...DEFAULT_META, path: '/' }, ...CATEGORIES, ...PAGES, BLOG_INDEX, ...BLOG_POSTS];
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const originalSchema = JSON.parse(template.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 delete originalSchema['@graph'][0].priceRange;
@@ -21,8 +22,22 @@ for (const page of [...pages, { path: '/404', title: 'Página no encontrada | RU
   html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`).replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`);
   if (page.path === '/404') html = html.replace('index, follow, max-image-preview:large', 'noindex, follow');
   const schema = structuredClone(originalSchema);
-  schema['@graph'].push({ '@type': CATEGORIES.includes(page) ? 'CollectionPage' : 'WebPage', '@id': `${url}#pagina`, url, name: page.title, description: page.description, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE_URL}/#sitio` } });
-  if (CATEGORIES.includes(page)) schema['@graph'].push({ '@type': 'BreadcrumbList', itemListElement: [{ '@type':'ListItem', position:1, name:'Inicio', item:`${SITE_URL}/` }, { '@type':'ListItem', position:2, name:page.name, item:url }] });
+  const breadcrumb = { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE_URL}/` }] };
+  const isCategory = CATEGORIES.includes(page);
+  const isPost = BLOG_POSTS.includes(page);
+  if (isCategory) breadcrumb.itemListElement.push({ '@type': 'ListItem', position: 2, name: page.name, item: url });
+  if (page === BLOG_INDEX) {
+    schema['@graph'].push({ '@type': 'Blog', '@id': `${url}#blog`, url, name: page.title, description: page.description, inLanguage: 'es-CL', publisher: { '@id': `${SITE_URL}/#negocio` }, isPartOf: { '@id': `${SITE_URL}/#sitio` } });
+  } else if (isPost) {
+    breadcrumb.itemListElement.push({ '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` }, { '@type': 'ListItem', position: 3, name: page.headline, item: url });
+    schema['@graph'].push(
+      { '@type': 'WebPage', '@id': `${url}#pagina`, url, name: page.title, description: page.description, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE_URL}/#sitio` } },
+      { '@type': 'BlogPosting', '@id': `${url}#guia`, url, headline: page.headline, description: page.description, datePublished: page.date, dateModified: page.date, inLanguage: 'es-CL', image: `${SITE_URL}/images/0914ad0ee180.jpg` , author: { '@id': `${SITE_URL}/#negocio` }, publisher: { '@id': `${SITE_URL}/#negocio` }, mainEntityOfPage: { '@id': `${url}#pagina` }, isPartOf: { '@id': `${SITE_URL}/blog#blog` } },
+    );
+  } else {
+    schema['@graph'].push({ '@type': isCategory ? 'CollectionPage' : 'WebPage', '@id': `${url}#pagina`, url, name: page.title, description: page.description, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE_URL}/#sitio` } });
+  }
+  if (breadcrumb.itemListElement.length > 1) schema['@graph'].push(breadcrumb);
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, () => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`);
   html = html.replace('<div id="root"></div>', () => `<div id="root">${render(page.path)}</div>`);
   const output = page.path === '/' ? 'dist/index.html' : page.path === '/404' ? 'dist/404.html' : `dist${page.path}/index.html`;

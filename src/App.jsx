@@ -6,6 +6,8 @@ import { business } from './config.js';
 import { readConsent, writeConsent, injectFonts, removeFonts, CONSENT_EVENT } from './consent.js';
 import { CATEGORIES } from './categories.js';
 import { CategoryPage, CategoryLinks } from './CategoryPage.jsx';
+import { BlogIndex, BlogPost, BlogLinks } from './Blog.jsx';
+import { BLOG_POSTS, BLOG_INDEX } from './blog.js';
 import Order from './Order.jsx';
 import QuoteForm from './QuoteForm.jsx';
 
@@ -17,7 +19,7 @@ const LEGAL_LINKS = {
 };
 
 const HOME_LINKS = [['mallas', 'Mallas'], ['bandejas', 'Bandejas'], ['cintas', 'Cintas de riego'], ['pedido', 'Pedido y pago']];
-const OTHER_LEGAL_LINKS = [['/', 'Inicio'], ...PAGES.map(page => [page.path, page.label])];
+const OTHER_LEGAL_LINKS = [['/', 'Inicio'], [BLOG_INDEX.path, BLOG_INDEX.label], ...PAGES.map(page => [page.path, page.label])];
 
 const currentPath = () => {
   const path = (globalThis.location?.pathname || '/').replace(/\/+$/, '') || '/';
@@ -56,6 +58,8 @@ export default function App({ initialPath }) {
   const [consent, setConsent] = useState(null);
   const path = initialPath || currentPath();
   const category = CATEGORIES.find(c => c.path === path);
+  const blogPost = BLOG_POSTS.find(post => post.path === path);
+  const blogIndex = path === BLOG_INDEX.path;
   const secondary = path !== '/';
   const Legal = LEGAL_LINKS[path];
 
@@ -77,7 +81,7 @@ export default function App({ initialPath }) {
     return () => { window.removeEventListener('keydown', close); window.removeEventListener(CONSENT_EVENT, reset); };
   }, []);
   useEffect(() => {
-    if (path === '/' || Legal || category) setHead(category || PAGES.find(page => page.path === path) || DEFAULT_META, path);
+    if (path === '/' || Legal || category || blogPost || blogIndex) setHead(category || PAGES.find(page => page.path === path) || blogPost || BLOG_INDEX || DEFAULT_META, path);
   }, [path]);
   useEffect(() => { if (consent === 'granted') injectFonts(); else removeFonts(); }, [consent]);
 
@@ -103,8 +107,11 @@ export default function App({ initialPath }) {
     <main id="contenido">
       {Legal
         ? <Legal />
-        : category ? <CategoryPage category={category} /> : secondary ? <section className="container seo-section"><h1>Página no encontrada</h1><p>Esta dirección no existe. <a href="/">Volver al catálogo RUVER</a>.</p></section>
-        : <><Hero onQuote={onQuote} /><CategoryLinks /><HowToBuy /><Discounts />
+        : category ? <CategoryPage category={category} />
+        : blogPost ? <BlogPost post={blogPost} />
+        : blogIndex ? <BlogIndex />
+        : secondary ? <section className="container seo-section"><h1>Página no encontrada</h1><p>Esta dirección no existe. <a href="/">Volver al catálogo RUVER</a>.</p></section>
+        : <><Hero onQuote={onQuote} /><CategoryLinks /><BlogLinks /><HowToBuy /><Discounts />
           <Meshes onQuote={onQuote} /><Trays onQuote={onQuote} /><Irrigation onQuote={onQuote} />
           <Order /><QuoteForm product={product} setProduct={setProduct} /></>}
     </main>

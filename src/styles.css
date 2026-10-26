@@ -43,3 +43,14 @@
 .legal-contact h3{font-size:20px}
 @media(max-width:760px){.legal-hero .container{padding:36px 20px 34px}.legal-body h2{margin:22px 0 6px}}
 .seo-section{padding-top:52px;padding-bottom:52px}.category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}.category-link{display:flex;justify-content:space-between;gap:10px;padding:22px;text-decoration:none;font-weight:700;color:inherit}.category-link:hover{outline:2px solid #467246}.catalog-scroll{overflow-x:auto}.seo-table{width:100%;border-collapse:collapse;font-size:.95rem}.seo-table th,.seo-table td{padding:14px 12px;text-align:left;border-bottom:1px solid #d9e1d5}.seo-table th{background:#edf2e8}.seo-table td:not(:first-child){white-space:nowrap}.legal-body li{margin-bottom:12px;line-height:1.7}.legal-body h3{margin-top:24px}@media(max-width:700px){.category-grid{grid-template-columns:1fr}.seo-table{font-size:.85rem}}
+
+/* Blog */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0 8px}
+.blog-card{display:flex;flex-direction:column;gap:8px;padding:20px 22px;color:inherit;border:1px solid var(--line);border-radius:10px;background:#fff}
+.blog-card:hover{outline:2px solid #467246}
+.blog-card time{font-size:13px;color:var(--muted)}
+.blog-card h2{font-size:21px;line-height:1.3}
+.blog-card a{color:inherit;text-decoration:none}
+.blog-card a:hover{text-decoration:underline;text-underline-offset:4px}
+.blog-card p{font-size:14px;color:var(--muted);margin:0}
+.blog-card-tag{font-size:13px;font-weight:600;color:var(--green)}
