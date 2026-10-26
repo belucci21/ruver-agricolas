@@ -22,7 +22,7 @@ El blog fue integrado al flujo de compilación del sitio, no es un sistema apart
 ### Cómo se publica una guía nueva (procedimiento)
 
 1. Agregar el objeto en `src/blog.js` con: `path`, `title` (diferente de todas las anteriores), `headline` (H1), `description` (60–200 caracteres), `date`, `dateLabel`, `category` (de `src/categories.js`) y `sections` (párrafos y/o listas).
-2. Actualizar el conteo de páginas en `tests/prerender.test.mjs` (actualmente 16). Este paso es intencional: obliga a revisar que el índice y el sitemap queden coherentes antes de publicar.
+2. Actualizar el conteo de páginas en `tests/prerender.test.mjs` (actualmente 17). Este paso es intencional: obliga a revisar que el índice y el sitemap queden coherentes antes de publicar.
 3. Ejecutar el flujo completo en una rama si hay dudas (npm test && npm run build); de lo contrario, empujar a `main`.
 4. En Docker Manager (VPS 2080359 → proyecto `ruver` → Implementar) reconstruir; el build corre tests + prerender dentro del contenedor.
 5. Verificar en el dominio: la guía responde 200 con H1 en el HTML prerrenderizado, el sitemap la incorpora y `/blog` la lista.
@@ -30,7 +30,7 @@ El blog fue integrado al flujo de compilación del sitio, no es un sistema apart
 
 ### Acumulación de contenido
 
-Las cuatro guías publicadas (26-oct) cubren las familias con mayor variedad de formato (raschel, antiáfido, bandejas, cinta de riego). Antimaleza y antihelada se atienden en la siguiente tanda (sección 3). Cada nueva guía hereda enlazado interno, sitemap y marcado sin trabajo manual.
+Las cinco guías publicadas (26-oct) cubren raschel, antiáfido, bandejas, cinta de riego y antimaleza. Antihelada se atiende en la siguiente tanda (estacional; sección 3 y 7). Cada nueva guía hereda enlazado interno, sitemap y marcado sin trabajo manual.
 
 ## 3 | Mapa de contenido: familia → guía → consultas
 
@@ -40,7 +40,7 @@ Matriz de trabajo. Prioridad cualitativa por cercanía a una cotización; valida
 | --- | --- | --- | --- |
 | Malla raschel /malla-raschel | Porcentajes de sombra ✔ | Elegir sombra según cultivo y exposición (síntomas de exceso/déficit de luz); instalación, anclaje y sujeción de paños | sombreadero Chile; raschel verde o negro; cortaviento raschel |
 | Malla antiáfido /malla-antiafido | 40 mesh u 50 mesh ✔ | Instalación en invernadero: bordes, puertas y ventanas; coexistencia con polinizadores y ventilación | malla para invernadero Chile; malla mosquito agrícola |
-| Malla antimaleza /malla-antimaleza | — | Cómo calcular rollos para una superficie (ancho útil, traslapo, 2 x 100 m) | manta antimaleza por metro; tela antihierba rollo |
+| Malla antimaleza /malla-antimaleza | Cálculo de rollos ✔ | Instalación y fijación de paños; elegir formato de rollo por cultivo (huerto, vivero) | manta antimaleza por metro; tela antihierba rollo |
 | Malla antihelada /malla-antihelada | — | Manto térmico 17 g: uso y retiro post-helada (estacional: publicar entre marzo y abril) | manta antihelada; mantillo térmico agrícola |
 | Bandejas almacigueras /bandejas-almacigueras | Celdas según cultivo ✔ | Del alveolo al trasplante: calendario de siembra por zona; pedir por caja de 100 | bandeja de siembra; caja de bandejas para almácigo |
 | Cintas de riego /cintas-de-riego | Cinta 6 mil ✔ | Diseño básico de hilera: largo, filtrado y presión; comparar cinta con manguera de goteo | cinta de goteo por metro; cinta de riego 6 mil precio |
@@ -64,7 +64,7 @@ Norma de textos de ancla: usar nombre + especificación («malla raschel 65 % en
 ## 5 | Search Console y líneas de medición
 
 1. Verificar la propiedad con el titular (dominio o prefijo de URL). Sin verificación no hay informes.
-2. Enviar `https://ruver-agricolas.com/sitemap.xml` (ahora 16 URLs, se mantiene sola).
+2. Enviar `https://ruver-agricolas.com/sitemap.xml` (ahora 17 URLs, se mantiene sola).
 3. Inspeccionar portada, /blog y una guía: comprobar que Google renderiza el HTML prerrenderizado y detectar índice/404.
 4. Exportar cada 28 días: consultas, páginas, país Chile, marca vs. no marca. Primera exportación = línea base histórica; no hay cifras previas que comparar.
 5. Priorizar mejoras por contenido con impresiones y pocas conversiones (título/bajada o falta de guía en esa familia).
@@ -84,8 +84,8 @@ Cadencia sostenible para este equipo: **1 guía nueva cada 1–2 semanas** (no d
 
 | Período | Compromiso | Cierre |
 | --- | --- | --- |
-| Semanas 1–2 | Verificar Search Console + sitemap; verificar 16 URLs en vivo | Propiedad verificada; blog indexado o en cola |
-| Semanas 3–4 | Guías de antimaleza (cálculo de rollos) y antihelada (manto 17 g, estacional) | Dos familias sin guía cubiertas |
+| Semanas 1–2 | Verificar Search Console + sitemap; verificar 17 URLs en vivo | Propiedad verificada; blog indexado o en cola |
+| Semanas 3–4 | Tanda siguiente por datos reales; antihelada (manto 17 g) solo entre marzo y abril (austral) | Familias sin guía: solo antihelada |
 | Semanas 5–8 | Ajustar títulos/descripciones con consultas reales observadas | Cambios justificados por datos, no por suposiciones |
 | Semanas 9–12 | Ficha de Google Business Profile + reseñas operativas | NAP coherente y ficha publicada |
 | Trimestre | Comparar 28 días vs previos; fortalecer familias con oportunidades reales | Informe con consultas, páginas y cotizaciones atendidas |
@@ -100,6 +100,6 @@ Cadencia sostenible para este equipo: **1 guía nueva cada 1–2 semanas** (no d
 
 ## 9 | Qué logró el 26 de octubre y qué falta
 
-- Logrado: 16 URLs prerrenderizadas y en sitemap; blog con enlazado cruzado home ↔ categorías ↔ guías; marcado Blog/BlogPosting/BreadcrumbList; proceso documentado para agregar guías sin tocar la infraestructura.
+- Logrado: 17 URLs prerrenderizadas y en sitemap (incluida la guía de antimaleza, verificada en vivo: 200 con H1 y sitemap en 17); blog con enlazado cruzado home ↔ categorías ↔ guías; marcado Blog/BlogPosting/BreadcrumbList; proceso documentado para agregar guías sin tocar la infraestructura.
 - Falta (dependencias externas): verificación de Search Console, ficha local, fichas de producto con fotos del negocio, medición de rendimiento real (PageSpeed/CrUX), primera exportación de datos de Search Console.
 - La indexación de las nuevas URLs depende de Google; el trabajo técnico solo la habilita.

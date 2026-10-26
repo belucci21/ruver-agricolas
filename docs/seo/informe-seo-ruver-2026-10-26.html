@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<title>Informe SEO y plan de crecimiento — RUVER — 26 de octubre de 2026</title>
+<style>
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  :root {
+    --verde: #166534; --verde-oscuro: #14532d; --tinta: #1f2937; --gris: #6b7280;
+    --borde: #d1d5db; --suave: #f0fdf4;
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--tinta); font-size: 10pt; line-height: 1.5; }
+  .sheet { padding: 18mm 18mm 20mm 18mm; }
+  .pv { break-before: page; }
+  h2 { break-after: avoid; }
+  table { break-inside: auto; }
+  tr { break-inside: avoid; }
+
+  /* Portada */
+  .cover { background: var(--verde-oscuro); color: #fff; padding: 16mm 18mm 12mm 18mm; }
+  .cover .marca { font-size: 11pt; letter-spacing: 2px; font-weight: 600; color: #bbf7d0; }
+  .cover h1 { font-size: 24pt; line-height: 1.25; margin: 6mm 0 2mm 0; font-weight: 700; }
+  .cover .sub { font-size: 12.5pt; color: #dcfce7; margin: 0 0 8mm 0; }
+  .cover .meta { font-size: 9.5pt; color: #d1fae5; border-top: 1px solid rgba(255,255,255,.35); padding-top: 4mm; }
+  .coverdomes { padding: 12mm 18mm; }
+  .coverdomes .empresa { font-size: 10.5pt; color: var(--tinta); margin: 0 0 6mm 0; }
+  .kbox { border: 1px solid var(--borde); border-left: 3px solid var(--verde); background: var(--suave); border-radius: 3px; padding: 4mm 5mm; margin: 0 0 5mm 0; font-size: 9.5pt; }
+  .kbox b { color: var(--verde-oscuro); }
+  .toc { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .toc td { border-bottom: 1px solid var(--borde); padding: 2mm 2mm; }
+  .toc td:first-child { color: var(--verde); font-weight: 700; width: 16mm; }
+
+  /* Secciones */
+  .seccion { display: flex; align-items: baseline; gap: 4mm; margin: 0 0 4mm 0; }
+  .chip { background: var(--verde); color: #fff; font-weight: 700; font-size: 10pt; padding: 1mm 3mm; border-radius: 3px; white-space: nowrap; }
+  .seccion h2 { font-size: 14pt; margin: 0; color: var(--verde-oscuro); }
+  h3 { font-size: 11pt; color: var(--verde-oscuro); margin: 5mm 0 2mm 0; }
+  p { margin: 0 0 3mm 0; }
+  ul, ol { margin: 0 0 3mm 0; padding-left: 6mm; }
+  li { margin-bottom: 1.5mm; }
+  table.data { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 0 0 3mm 0; }
+  table.data th { background: var(--verde-oscuro); color: #fff; text-align: left; padding: 2mm 2.5mm; font-size: 9pt; }
+  table.data td { border: 1px solid var(--borde); padding: 1.8mm 2.5mm; vertical-align: top; }
+  table.data tr:nth-child(even) td { background: #f8fafc; }
+  .mono { font-family: Consolas, "Courier New", monospace; font-size: 8.5pt; color: #0f172a; }
+  .callout { border: 1px solid var(--borde); background: #fefce8; border-radius: 3px; padding: 3.5mm 4.5mm; font-size: 9pt; margin: 0 0 4mm 0; }
+  .ope { border: 1px solid #fca5a5; background: #fef2f2; }
+  .ope .titulo { color: #b91c1c; font-weight: 700; }
+  .pie { margin-top: 6mm; padding-top: 3mm; border-top: 1px solid var(--borde); font-size: 8.5pt; color: var(--gris); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="marca">RUVER · ruver-agricolas.com</div>
+  <h1>Informe SEO y plan de crecimiento</h1>
+  <div class="sub">Iteración blog — 26 de octubre de 2026</div>
+  <div class="meta">
+    ruver-agricolas.com · Chile · 26 de octubre de 2026<br>
+    INSUAGRI RUVER SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Región de Valparaíso
+  </div>
+</div>
+<div class="sheet">
+  <div class="kbox">
+    <b>Estado verificado en producción:</b> 17 URLs prerrenderizadas y en sitemap — portada, 6 categorías, 4 páginas legales, índice de blog y 5 guías. Comprobado por HTTPS el 26 de octubre: cada URL responde 200 con H1, título y canonical propios en el HTML sin JavaScript; ruta inexistente responde 404 real.
+  </div>
+  <h3 style="margin-top:0">Contenido</h3>
+  <table class="toc">
+    <tr><td>01</td><td>Verificación técnica HTTP (26 de octubre)</td></tr>
+    <tr><td>02</td><td>SEO del blog: metadatos y marcado</td></tr>
+    <tr><td>03</td><td>Contenido publicado (5 guías)</td></tr>
+    <tr><td>04</td><td>Enlazado interno</td></tr>
+    <tr><td>05</td><td>Privacidad y confianza</td></tr>
+    <tr><td>06</td><td>Qué sigue (resumen de la estrategia)</td></tr>
+    <tr><td>07</td><td>Medición</td></tr>
+  </table>
+</div>
+
+<div class="pv"></div>
+<div class="sheet">
+  <div class="seccion"><span class="chip">Resumen</span><h2>Resumen ejecutivo</h2></div>
+  <p>Entre el 20 y el 23 de octubre de 2026 el sitio pasó de una portada de JavaScript a un conjunto de 11 direcciones prerrenderizadas con títulos, descripciones y canonical propios; datos estructurados de Store y WebSite; robots.txt y sitemap.xml reales; páginas 404 diferenciadas; y textos legales revisados. Ese trabajo está en producción y se verificó por HTTP el 23 de octubre.</p>
+  <p>Hoy, 26 de octubre, se sumó una capa de contenido escalable: un blog de guías con 6 direcciones nuevas (índice + 5 guías), prerrenderizadas en la compilación, incluidas en el sitemap (17 URLs en total), con marcado Blog/BlogPosting/BreadcrumbList y enlazado cruzado con la portada y las categorías. Segunda entrega del mismo día: la guía «Malla antimaleza: cómo calcular los rollos para tu superficie» (19 variantes del catálogo; anchos de 0,70 a 4 metros), publicada y verificada en vivo tras el último build.</p>
+
+  <h3>Decisión de estrategia</h3>
+  <p>Las categorías resuelven búsquedas de compra y el blog resuelve búsquedas de información («qué porcentaje de sombra», «40 u 50 mesh», «cuántas celdas», «6 mil»). Cada guía termina en una cotización de su categoría. Esta separación evita canibalización: una intención, una URL.</p>
+  <table class="data">
+    <tr><th>Iteración 23-oct</th><th>Iteración 26-oct (blog)</th><th>Total</th></tr>
+    <tr><td>11 URLs: portada + 6 categorías + 4 legales</td><td>+6 URLs: /blog + 5 guías</td><td><b>17 URLs en sitemap</b></td></tr>
+  </table>
+
+  <h3>Estado de la entrega del blog</h3>
+  <ul>
+    <li><span class="mono">src/blog.js</span>: datos del índice y de cada guía (ruta, título, bajada, fecha, categoría, secciones).</li>
+    <li><span class="mono">src/Blog.jsx</span>: índice, plantilla de guía y bloques de enlaces internos.</li>
+    <li><span class="mono">scripts/prerender.mjs</span>: genera cada <span class="mono">/blog/&lt;slug&gt;</span> como HTML propio con título, canonical, Open Graph y JSON-LD; actualiza sitemap y robots automáticamente.</li>
+    <li>Tests que impiden publicar contenido roto: <span class="mono">tests/blog.test.js</span> (integridad de datos) y <span class="mono">tests/prerender.test.mjs</span> (17 páginas con H1 y título únicos, sitemap completo, 404 correcto).</li>
+    <li>Enlazado: la portada muestra el índice de guías; cada categoría enlaza las guías; cada guía enlaza su categoría, las demás guías, envíos y el pedido de la web; el pie de página enlaza el blog en todas las páginas.</li>
+  </ul>
+
+  <div class="callout">
+    <b>Alcance y límites.</b> Auditoría de código, compilación y respuestas HTTP del dominio; revisión de navegador. Sin acceso a Search Console ni analítica: no hay volúmenes de búsqueda, posiciones, clics ni puntuaciones de Lighthouse declaradas; las expresiones de consulta propuestas son hipótesis de trabajo. Publicar páginas no garantiza indexación ni posiciones.
+  </div>
+</div>
+
+<div class="pv"></div>
+<div class="sheet">
+  <div class="seccion"><span class="chip">01</span><h2>Verificación técnica HTTP (26 de octubre)</h2></div>
+  <p>Verificación final medida por HTTPS sobre el dominio real a las 11:4x del 26 de octubre (tras el rebuild definitivo, que incluyó la guía de antimaleza), con <span class="mono">Cache-Control: no-cache</span>:</p>
+  <table class="data">
+    <tr><th style="width:38%">Comprobación</th><th>Resultado</th></tr>
+    <tr><td><span class="mono">/blog</span> (índice)</td><td>200, HTML prerrenderizado con H1 propio («Guías para elegir insumos agrícolas»)</td></tr>
+    <tr><td><span class="mono">/blog/raschel-porcentaje-de-sombra</span></td><td>200 con H1, título y canonical propios</td></tr>
+    <tr><td><span class="mono">/blog/antiafido-40-o-50-mesh</span></td><td>200 con H1, título y canonical propios</td></tr>
+    <tr><td><span class="mono">/blog/bandejas-almacigueras-celdas</span></td><td>200 con H1, título y canonical propios</td></tr>
+    <tr><td><span class="mono">/blog/cinta-de-riego-6-mil</span></td><td>200 con H1, título y canonical propios</td></tr>
+    <tr><td><span class="mono">/blog/malla-antimaleza-rollos</span> (segunda entrega del 26-oct)</td><td>200 con H1, título y canonical propios (<span class="mono">charset=utf-8</span> y tildes verificadas byte a byte)</td></tr>
+    <tr><td>Categorías (6)</td><td>200 con H1 propio</td></tr>
+    <tr><td>Páginas legales (4)</td><td>200</td></tr>
+    <tr><td><span class="mono">sitemap.xml</span></td><td>200, XML con 17 URLs (<span class="mono">&lt;loc&gt;</span> medidos por expresión regular sobre la línea única del XML; <span class="mono">grep -c</span> cuenta líneas completas y no sirve para contarlas)</td></tr>
+    <tr><td><span class="mono">robots.txt</span></td><td>200, texto plano, enlaza el sitemap</td></tr>
+    <tr><td>Ruta inexistente</td><td>404 con página propia (<span class="mono">noindex, follow</span>)</td></tr>
+    <tr><td>Puerto interno 8088</td><td>Coincide con el servido por el dominio (Caddy → 8088)</td></tr>
+    <tr><td>Fonts</td><td>Solo se cargan tras aceptar cookies; el HTML prerrenderizado no depende de Google Fonts</td></tr>
+  </table>
+
+  <h3>Criterio de verificación</h3>
+  <p>Cada URL nueva responde 200, tiene un H1, título y canonical propios, y su contenido existe en el HTML sin ejecutar JavaScript. El sitemap es XML; una dirección inventada devuelve 404. Los tests de compilación exigen estas mismas condiciones dentro del contenedor antes de publicar: si fallan, la versión anterior sigue en producción.</p>
+
+  <div class="callout ope">
+    <span class="titulo">Incidente operacional del despliegue — causa raíz y solución definitiva.</span>
+    <ul style="margin-bottom:0">
+      <li><b>Síntoma:</b> el código con el blog estaba en <span class="mono">origin/main</span> horas antes, pero el dominio seguía sirviendo la imagen del 23-oct (sitemap de 11 URLs y <span class="mono">/blog</span> en 404).</li>
+      <li><b>Causa 1:</b> el botón «Implementar» del Docker Manager solo ejecuta <span class="mono">docker compose up</span> (su registro mostró «Pulling project images / ruver Skipped / No image to be pulled»): re-creó el contenedor con la imagen antigua, sin compilar. Seis intentos entre 10:25 y 10:59 lo confirmaron («Listo» en Últimas acciones sin build).</li>
+      <li><b>Causa 2:</b> fijar el commit exacto en el contexto (<span class="mono">git#2950903</span> corto) no funcionó: el fetch de BuildKit de este Docker no resuelve SHA cortos y el build falla en segundos con «repository does not contain ref» (mensaje visible solo en el log del build, no en el panel).</li>
+      <li><b>Solución definitiva ejecutada en la consola del VPS (root):</b> restaurar <span class="mono">#main</span> en el contexto del compose del proyecto y ejecutar <span class="mono">docker compose -f /docker/ruver/docker-compose.yml build ruver</span> (EXIT 0) y <span class="mono">docker compose -f /docker/ruver/docker-compose.yml up -d ruver</span>. Heredado del procedimiento del 23-oct.</li>
+      <li><b>Flujo de publicación verificado del 26-oct:</b> push a <span class="mono">main</span> → build por consola/VPS (<span class="mono">docker compose build</span> + <span class="mono">up -d</span>) → verificar <span class="mono">sitemap.xml</span> (17 <span class="mono">&lt;loc&gt;</span>) y las 6 direcciones del blog (200 con H1 prerrenderizado).</li>
+      <li><b>Para próximas guías:</b> repetir exactamente ese flujo; no confiar en «Implementar» solo, y no fijar SHA cortos en el <span class="mono">context</span>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="pv"></div>
+<div class="sheet">
+  <div class="seccion"><span class="chip">02</span><h2>SEO del blog: metadatos y marcado</h2></div>
+  <ul>
+    <li>Cada guía tiene título y descripción propios y únicos (los tests los verifican): no hay dos URLs del sitio con el mismo title.</li>
+    <li>JSON-LD por página: en el índice, tipo <span class="mono">Blog</span>; en cada guía, <span class="mono">BlogPosting</span> con fecha de publicación, autor y editor (la empresa), así como <span class="mono">BreadcrumbList</span> Inicio → Blog → Guía.</li>
+    <li>El índice del blog usa un título distinto al de la portada comercial para no competir entre sí («Blog RUVER | Guías de mallas, bandejas y riego»).</li>
+    <li>Sin reseñas, valoraciones ni disponibilidad inventadas; sin schema de Product/Offer hasta tener fichas verificadas por producto.</li>
+    <li>Fecha de publicación: 2026-10-26; se mantendrá <span class="mono">dateModified</span> al actualizar guías.</li>
+  </ul>
+
+  <div class="pv"></div>
+  <div class="seccion"><span class="chip">03</span><h2>Contenido publicado (5 guías)</h2></div>
+  <table class="data">
+    <tr><th>Guía</th><th>Categoría vinculada</th><th>Consultas objetivo (propuestas)</th></tr>
+    <tr><td>Malla raschel: qué significa cada porcentaje de sombra</td><td><span class="mono">/malla-raschel</span></td><td>porcentaje de sombra raschel; raschel 65 %; sombreadero</td></tr>
+    <tr><td>Malla antiáfido: ¿40 mesh o 50 mesh?</td><td><span class="mono">/malla-antiafido</span></td><td>malla antiáfido 40 mesh; 50 mesh; poros</td></tr>
+    <tr><td>Bandejas almacigueras: cuál elegir según el cultivo</td><td><span class="mono">/bandejas-almacigueras</span></td><td>bandeja 128 celdas; caja de 100 bandejas</td></tr>
+    <tr><td>Cinta de riego por goteo: qué revisar antes de comparar</td><td><span class="mono">/cintas-de-riego</span></td><td>cinta de riego 6 mil; goteros 10 15 20 cm</td></tr>
+    <tr><td>Malla antimaleza: cómo calcular los rollos para tu superficie</td><td><span class="mono">/malla-antimaleza</span></td><td>manta antimaleza por metro; tela antihierba rollo; malla antimaleza 2 x 100</td></tr>
+  </table>
+  <p>Reglas aplicadas en la redacción: datos del catálogo (medidas, porcentajes, gramajes, caudales), sin precios prometidos sin confirmar, sin stock ni plazos garantizados; cada guía cierra con qué enviar por WhatsApp para cotizar (producto, medida, cantidad, comuna).</p>
+  <p>Familia aún sin guía: malla antihelada (estacional, manto térmico 17 g; mejor publicar entre marzo y abril, antes del otoño austral). La guía de antimaleza se publicó el 26-oct. Véase la estrategia escalable adjunta.</p>
+
+  <div class="seccion"><span class="chip">04</span><h2>Enlazado interno</h2></div>
+  <ul>
+    <li>Portada → índice de guías (sección «Guías del blog RUVER»).</li>
+    <li>Índice de guías → cada guía y las seis categorías.</li>
+    <li>Cada guía → su categoría (encabezado y CTA de cotización), las otras guías, envíos y pedido de la web.</li>
+    <li>Cada categoría → todas las guías del blog.</li>
+    <li>Pie de página global → «Blog de guías».</li>
+  </ul>
+  <p>Efecto esperado (a validar con Search Console): el rastreo descubre las 17 URLs por enlaces internos sin depender solo del sitemap, y el flujo guía → categoría concentra autoridad en las URLs de compra.</p>
+</div>
+
+<div class="pv"></div>
+<div class="sheet">
+  <div class="seccion"><span class="chip">05</span><h2>Privacidad y confianza sin cambios</h2></div>
+  <ul>
+    <li>Sin rastreadores ni analítica de terceros: solo <span class="mono">localStorage</span> (carrito y consentimiento).</li>
+    <li>Google Fonts se carga únicamente tras aceptar; el banner de cookies permite rechazar y revocar («Ajustes de cookies»).</li>
+    <li>Las políticas legales publicadas el 23-oct siguen vigentes: identidad INSUAGRI RUVER SpA · RUT 77.872.414-6; garantía de seis meses; retracto de 10 días con reglas de devolución; sin datos bancarios publicados.</li>
+    <li>Pendiente del negocio: nombre del representante legal y condiciones operativas confirmadas (despachos y devoluciones reales).</li>
+    <li>Recordatorio regulatorio: Ley N.° 21.719 (protección de datos) entra en vigor el 1 de diciembre de 2026; revisar políticas y procedimientos antes de esa fecha.</li>
+  </ul>
+
+  <div class="seccion"><span class="chip">06</span><h2>Qué sigue (resumen de la estrategia adjunta)</h2></div>
+  <ol>
+    <li>Verificar propiedad en Search Console y enviar el sitemap (17 URLs).</li>
+    <li>Publicar la guía de antihelada (manto térmico 17 g) entre marzo y abril austral; la de antimaleza (cálculo de rollos) se publicó el 26-oct.</li>
+    <li>Gestionar la ficha de Google Business Profile con NAP coherente y reseñas reales.</li>
+    <li>Medir cada 28 días con Search Console: impresiones, clics, consultas marca/no marca; nada de métricas suspensivas.</li>
+    <li>Mantener el procedimiento documentado para agregar guías sin tocar infraestructura.</li>
+  </ol>
+
+  <div class="seccion"><span class="chip">07</span><h2>Medición</h2></div>
+  <p>Mismas líneas del informe del 23-oct (Search Console, cotizaciones registradas por WhatsApp/correo, Core Web Vitals cuando haya datos de campo). Línea base: no existen mediciones previas; la primera exportación de 28 días será el punto de comparación «antes y después» del blog.</p>
+
+  <div class="pie">
+    RUVER · INSUAGRI RUVER SpA · RUT 77.872.414-6 · Av. San Isidro 21H, Quillota, Región de Valparaíso, Chile · ruver-agricolas.com<br>
+    Informe SEO del 26 de octubre de 2026. Documento complementario: «Estrategia SEO escalable RUVER» (2026-10-26). Verificación técnica medida por HTTPS sobre el dominio el mismo día; sin datos bancarios ni personales.
+  </div>
+</div>
+
+</body>
+</html>

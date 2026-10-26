@@ -82,9 +82,9 @@ El HTML original de Downloads no se modifica.
 
 ## SEO y documentos legales (23 de octubre de 2026)
 
-La compilación genera 16 páginas con contenido HTML, título, descripción,
+La compilación genera 17 páginas con contenido HTML, título, descripción,
 canonical y datos estructurados propios: inicio, seis familias del catálogo, el
-índice del blog y cuatro guías de compra, además de los legales términos,
+índice del blog y cinco guías de compra, además de los legales términos,
 privacidad, cookies y envíos/devoluciones. Genera también robots.txt,
 sitemap.xml y 404.html. Nginx sirve las rutas existentes y responde 404 para
 las demás. No sustituir esta configuración por un fallback general a la portada.
