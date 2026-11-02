@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Hero, HowToBuy, Discounts, Meshes, Trays, Irrigation, Footer } from './Sections.jsx';
 import { Terms, Privacy, Cookies, Shipping } from './legal.jsx';
-import { PAGES, DEFAULT_META, SITE_URL } from './routes.js';
+import { PAGES, SITE_URL } from './routes.js';
+import { pageMeta } from './page-meta.js';
 import { business } from './config.js';
 import { readConsent, writeConsent, injectFonts, removeFonts, CONSENT_EVENT } from './consent.js';
 import { CATEGORIES } from './categories.js';
@@ -81,7 +82,8 @@ export default function App({ initialPath }) {
     return () => { window.removeEventListener('keydown', close); window.removeEventListener(CONSENT_EVENT, reset); };
   }, []);
   useEffect(() => {
-    if (path === '/' || Legal || category || blogPost || blogIndex) setHead(category || PAGES.find(page => page.path === path) || blogPost || BLOG_INDEX || DEFAULT_META, path);
+    const meta = pageMeta(path);
+    if (meta) setHead(meta, path);
   }, [path]);
   useEffect(() => { if (consent === 'granted') injectFonts(); else removeFonts(); }, [consent]);
 
@@ -98,6 +100,7 @@ export default function App({ initialPath }) {
         <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Cerrar ✕' : 'Menú ☰'}</button>
         <nav id="navigation" aria-label="Secciones" className={menuOpen ? 'navigation is-open' : 'navigation'}>
           {navigation}
+          {!secondary && <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>}
           {secondary
             ? <a className="button button-lime" href={contactHref} onClick={() => setMenuOpen(false)}>Pedir cotización <span aria-hidden="true">↗</span></a>
             : <a className="button button-lime" href={contactHref} onClick={() => onQuote('')}>Pedir cotización <span aria-hidden="true">↗</span></a>}

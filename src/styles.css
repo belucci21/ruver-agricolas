@@ -54,3 +54,4 @@
 .blog-card a:hover{text-decoration:underline;text-underline-offset:4px}
 .blog-card p{font-size:14px;color:var(--muted);margin:0}
 .blog-card-tag{font-size:13px;font-weight:600;color:var(--green)}
+.blog-figure,.blog-diagram{margin:0 0 32px}.blog-figure img{display:block;width:100%;height:280px;object-fit:cover;border-radius:12px}.blog-figure figcaption,.blog-diagram figcaption{font-size:13px;line-height:1.5;margin-top:10px;color:var(--muted)}.blog-diagram{padding:18px;background:#f1f5ec;border:1px solid #d9e1d5;border-radius:12px}.blog-diagram svg{display:block;width:100%;height:auto;font-family:inherit;font-size:17px;fill:#16351c}@media(max-width:600px){.blog-figure img{height:200px}.blog-diagram{padding:8px}}

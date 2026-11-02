@@ -32,7 +32,7 @@ for (const page of [...pages, { path: '/404', title: 'Página no encontrada | RU
     breadcrumb.itemListElement.push({ '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` }, { '@type': 'ListItem', position: 3, name: page.headline, item: url });
     schema['@graph'].push(
       { '@type': 'WebPage', '@id': `${url}#pagina`, url, name: page.title, description: page.description, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE_URL}/#sitio` } },
-      { '@type': 'BlogPosting', '@id': `${url}#guia`, url, headline: page.headline, description: page.description, datePublished: page.date, dateModified: page.date, inLanguage: 'es-CL', image: `${SITE_URL}/images/0914ad0ee180.jpg` , author: { '@id': `${SITE_URL}/#negocio` }, publisher: { '@id': `${SITE_URL}/#negocio` }, mainEntityOfPage: { '@id': `${url}#pagina` }, isPartOf: { '@id': `${SITE_URL}/blog#blog` } },
+      { '@type': 'BlogPosting', '@id': `${url}#guia`, url, headline: page.headline, description: page.description, datePublished: page.date, dateModified: page.modified || page.date, inLanguage: 'es-CL', ...(page.image ? { image: `${SITE_URL}${page.image}` } : {}), author: { '@id': `${SITE_URL}/#negocio` }, publisher: { '@id': `${SITE_URL}/#negocio` }, mainEntityOfPage: { '@id': `${url}#pagina` }, isPartOf: { '@id': `${SITE_URL}/blog#blog` } },
     );
   } else {
     schema['@graph'].push({ '@type': isCategory ? 'CollectionPage' : 'WebPage', '@id': `${url}#pagina`, url, name: page.title, description: page.description, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE_URL}/#sitio` } });
@@ -45,6 +45,6 @@ for (const page of [...pages, { path: '/404', title: 'Página no encontrada | RU
   await writeFile(output, html);
 }
 await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
-await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(p => `<url><loc>${SITE_URL}${p.path}</loc></url>`).join('')}</urlset>\n`);
+await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(p => `<url><loc>${SITE_URL}${p.path}</loc>${p.modified || p.date ? `<lastmod>${p.modified || p.date}</lastmod>` : ''}</url>`).join('')}</urlset>\n`);
 await rm('.prerender', { recursive: true, force: true });
 console.log(`Prerender: ${pages.length} páginas y 404, robots y sitemap generados.`);

@@ -1,3 +1,4 @@
+import { NEW_POSTS } from './new-posts.js';
 // Guías del blog. Cada entrada agrega /blog/<slug>, se prerrenderiza y entra al
 // sitemap automáticamente (scripts/prerender.mjs). El contenido usa datos del
 // catálogo de RUVER; no se publican precios prometidos ni disponibilidad.
@@ -8,13 +9,13 @@ export const BLOG_INDEX = {
   description: 'Guías para elegir malla antiáfido, raschel, antimaleza, antihelada, bandejas almacigueras y cinta de riego, con los pasos de cotización del catálogo RUVER.',
 };
 
-export const BLOG_POSTS = [
+const EXISTING_POSTS = [
   {
     path: '/blog/raschel-porcentaje-de-sombra',
     slug: 'raschel-porcentaje-de-sombra',
     title: 'Porcentajes de sombra de la malla raschel | Blog RUVER',
     headline: 'Malla raschel: qué significa cada porcentaje de sombra',
-    description: 'Porcentajes de malla raschel de 35 a 90 %, anchos de 2,10 y 4,20 m y colores del catálogo RUVER. Qué confirme antes de cotizar según cultivo y exposición.',
+    description: 'Porcentajes de malla raschel de 35 a 90 %, anchos de 2,10 y 4,20 m y colores del catálogo RUVER. Qué confirmar antes de cotizar según cultivo y exposición.',
     date: '2026-10-26',
     dateLabel: '26 de octubre de 2026',
     category: '/malla-raschel',
@@ -50,7 +51,7 @@ export const BLOG_POSTS = [
     category: '/malla-antiafido',
     sections: [
       { heading: 'Para qué sirve la malla antiáfido', paragraphs: [
-        'Bloquea el paso de trips, áfidos, mosca blanca y pulgones, y deja pasar el aire entre los paños. En el catálogo se indica que reduce la necesidad de aplicar insecticidas; la eficacia real depende también de la instalación y del cierre de accesos.',
+        'La malla se utiliza como barrera física frente a insectos en estructuras de cultivo. Su adecuación depende de la plaga objetivo, el poro real, el cierre de accesos y la ventilación necesaria. No se puede garantizar control de trips u otras plagas únicamente por indicar 40 o 50 mesh; confirma la ficha técnica y el manejo con tu asesor.',
       ] },
       { heading: '40 mesh (16/10): más ventilación', paragraphs: [
         'El formato 16/10 de 40 mesh se vende en rollos de 4 x 100 m, con 110 g/m², un 24 % de sombra y poros de 0,39 x 0,77 mm. Es la versión con el poro más grande de la familia, elegida cuando la ventilación de la estructura pesa más en el diseño.',
@@ -76,7 +77,7 @@ export const BLOG_POSTS = [
     category: '/bandejas-almacigueras',
     sections: [
       { heading: 'Por qué importa el número de celdas', paragraphs: [
-        'Las bandejas almacigueras permiten producir plantines uniformes y trasplantarlos sin dañar la raíz. El número de celdas decide cuánto espacio tiene cada plantín y cuántos bandejas necesitas para tu superficie.',
+        'Las bandejas almacigueras permiten producir plantines uniformes y trasplantarlos sin dañar la raíz. El número de celdas influye en la capacidad de producción, pero también hay que revisar dimensiones y volumen del alvéolo. El cultivo, el tiempo hasta el trasplante y el manejo ayudan a decidir el formato.',
       ] },
       { heading: 'Elección de alvéolos según cultivo', paragraphs: [
         'La correspondencia del catálogo entre celdas y cultivos recomendados es la siguiente:',
@@ -117,7 +118,7 @@ export const BLOG_POSTS = [
         'Caudal por gotero: 1,1 L/h.',
       ] },
       { heading: 'Datos para cotizar', paragraphs: [
-        'Antes de comprar, revisa el diseño hidráulico y la calidad del agua: indica la superficie y el largo de las hileras, la separación entre plantas y la especificación de cinta que necesitas. Con esos datos confirmamos compatibilidad con tu filtrado y el resto del sistema.',
+        'Antes de comprar, revisa el diseño hidráulico y la calidad del agua: indica la superficie y el largo de las hileras, la separación entre plantas y la especificación de cinta que necesitas. Esos datos permiten precisar la solicitud; la compatibilidad hidráulica y el filtrado deben contrastarse con la ficha técnica y el diseño de la instalación.',
       ], list: [
         'Mensaje de ejemplo: «Hola, quiero cotizar cinta de riego 6 mil con goteros cada 15 cm para 2.000 metros de hilera; comuna de Quillota».',
       ] },
@@ -160,6 +161,38 @@ export const BLOG_POSTS = [
     ],
   },
 ];
+
+const CATEGORY_ANCHORS = {
+  '/malla-raschel': 'medidas y precios de malla raschel',
+  '/malla-antiafido': 'formatos de malla antiáfido',
+  '/malla-antimaleza': 'anchos y precios de malla antimaleza',
+  '/malla-antihelada': 'formatos de malla antihelada',
+  '/bandejas-almacigueras': 'bandejas por unidad y caja de 100',
+  '/cintas-de-riego': 'formatos de cinta de riego disponibles',
+};
+const IMAGES = {
+  '/malla-raschel': ['/images/0914ad0ee180.jpg', 'Sombreadero cubierto con malla raschel'],
+  '/malla-antiafido': ['/images/d3615e3d5b46.jpg', 'Tejido de una malla antiáfido'],
+  '/malla-antimaleza': ['/images/144daa186560.jpg', 'Malla antimaleza instalada alrededor de plantines'],
+  '/malla-antihelada': ['/images/e4209fc7f047.jpg', 'Túneles agrícolas cubiertos con manto antihelada'],
+  '/bandejas-almacigueras': ['/images/a5eb8be00dce.jpg', 'Bandejas almacigueras con plantines'],
+};
+
+export const BLOG_POSTS = [...EXISTING_POSTS, ...NEW_POSTS].map(post => {
+  const image = IMAGES[post.category];
+  const sections = post.sections.map((section, index) => index === 0 && !section.links ? {
+    ...section,
+    links: [{ before: 'Para comparar las presentaciones, consulta el ', text: CATEGORY_ANCHORS[post.category], href: post.category, after: ' y confirma disponibilidad antes de pagar.' }],
+  } : section);
+  return { ...post, sections, modified: '2026-11-02', modifiedLabel: '2 de noviembre de 2026',
+    ...(image ? { image: image[0], imageAlt: image[1] } : {}),
+  };
+});
+
+export function relatedPosts(post) {
+  const categories = post.categories || [post.category];
+  return BLOG_POSTS.filter(other => other.path !== post.path && (other.categories || [other.category]).some(category => categories.includes(category))).slice(0, 3);
+}
 
 // Utilidades compartidas con la compilación y las pruebas.
 export function blogPages() {
