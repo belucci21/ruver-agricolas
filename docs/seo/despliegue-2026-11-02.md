@@ -1,6 +1,6 @@
 # Entrega SEO - 2 de noviembre de 2026
 
-Estado: preparada y validada en local; pendiente de activar en Hostinger.
+Estado: publicada en Hostinger y verificada en el dominio el 2 de noviembre de 2026.
 Rama: codex/seo-nuevos-temas-2026-11-02.
 
 ## Contenido de esta versión
@@ -57,7 +57,7 @@ No crear un segundo servicio con el mismo puerto 8088.
 7. Revisar imágenes, enlaces de categoría y cotización, menú móvil y carrito.
 
 Reiniciar el contenedor o usar Implementar sin build no garantiza actualizar la imagen.
-No se han ejecutado estos pasos en el VPS como parte de la preparación.
+Estos pasos se ejecutaron en el VPS tras la petición expresa de publicación.
 
 ## Después de activar
 
@@ -69,3 +69,19 @@ Fuentes de criterio:
 
 - https://developers.google.com/search/docs/crawling-indexing/links-crawlable
 - https://biblioteca.inia.cl/bitstreams/ed563cfd-f95b-4768-9384-1ca9e3a74c30/download
+
+
+## Verificación de publicación
+
+Versión de la aplicación: 1aef8e30af49fcd6fd1bce87eedfc119ce50cdbe, integrada en main.
+Se conservó la imagen anterior como `ruver-ruver:pre-seo-20261102` antes de reconstruir.
+Build del VPS satisfactorio; servicio ruver recreado con la nueva imagen.
+
+- Las 20 URLs del sitemap devuelven 200, con un H1 y canonical propio.
+- Las tres guías nuevas responden y muestran sus titulares en navegador.
+- Sitemap XML de 20 URLs, robots en texto y dirección inexistente con 404.
+- Bundle público `/assets/index-CbypHgze.js` coincide con la compilación validada.
+- Título, descripción y canonical de inicio correctos después de ejecutar React.
+- Consola sin errores en la revisión de inicio y de las tres guías nuevas.
+
+Search Console y fichas de directorios no se modificaron en este despliegue.
