@@ -6,7 +6,7 @@ import { CATEGORIES } from '../src/categories.js';
 import { blogPages } from '../src/blog.js';
 import { BLOG_POSTS } from '../src/blog.js';
 const pages = ['/', ...PAGES.map(p=>p.path), ...CATEGORIES.map(p=>p.path), ...blogPages().map(p=>p.path)];
-test('20 páginas con contenido y metadatos propios sin depender de JavaScript',async()=>{
+test('páginas con contenido y metadatos propios sin depender de JavaScript',async()=>{
  const titles = new Set();
  for(const path of pages){
   const html = await readFile(`dist${path === '/' ? '' : path}/index.html`,'utf8');

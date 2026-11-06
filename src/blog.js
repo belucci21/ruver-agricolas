@@ -1,4 +1,5 @@
 import { NEW_POSTS } from './new-posts.js';
+import { REJA_POSTS } from './reja-posts.js';
 // Guías del blog. Cada entrada agrega /blog/<slug>, se prerrenderiza y entra al
 // sitemap automáticamente (scripts/prerender.mjs). El contenido usa datos del
 // catálogo de RUVER; no se publican precios prometidos ni disponibilidad.
@@ -178,16 +179,16 @@ const IMAGES = {
   '/bandejas-almacigueras': ['/images/a5eb8be00dce.jpg', 'Bandejas almacigueras con plantines'],
 };
 
-export const BLOG_POSTS = [...EXISTING_POSTS, ...NEW_POSTS].map(post => {
+export const BLOG_POSTS = [...EXISTING_POSTS, ...NEW_POSTS, ...REJA_POSTS].map(post => {
   const image = IMAGES[post.category];
   const sections = post.sections.map((section, index) => index === 0 && !section.links ? {
     ...section,
     links: [{ before: 'Para comparar las presentaciones, consulta el ', text: CATEGORY_ANCHORS[post.category], href: post.category, after: ' y confirma disponibilidad antes de pagar.' }],
   } : section);
-  return { ...post, sections, modified: '2026-11-02', modifiedLabel: '2 de noviembre de 2026',
+  return { ...post, sections, modified: post.modified || (post.date > '2026-11-02' ? post.date : '2026-11-02'), modifiedLabel: post.modifiedLabel || (post.date > '2026-11-02' ? post.dateLabel : '2 de noviembre de 2026'),
     ...(image ? { image: image[0], imageAlt: image[1] } : {}),
   };
-});
+}).sort((a, b) => b.date.localeCompare(a.date));
 
 export function relatedPosts(post) {
   const categories = post.categories || [post.category];

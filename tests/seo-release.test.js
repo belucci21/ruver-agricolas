@@ -12,9 +12,9 @@ test('inicio conserva metadatos comerciales y blog conserva los suyos', () => {
   assert.equal(pageMeta('/no-existe'), null);
 });
 
-test('las tres guías nuevas resuelven familias y cotización con enlaces válidos', () => {
+test('las guías publicadas resuelven familias y cotización con enlaces válidos', () => {
   const paths = new Set(['/', '/blog', ...PAGES.map(p => p.path), ...CATEGORIES.map(p => p.path), ...BLOG_POSTS.map(p => p.path)]);
-  assert.equal(BLOG_POSTS.length, 8);
+  assert.equal(BLOG_POSTS.length, 11);
   for (const post of BLOG_POSTS) {
     const links = post.sections.flatMap(section => section.links || []);
     assert.ok(links.length > 0, post.path);
