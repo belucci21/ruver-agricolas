@@ -1,6 +1,6 @@
 # SEO RUVER: rejas, cercos y usos del tejido
 
-Fecha: 6 de noviembre de 2026. Estado: preparado y validado localmente; pendiente de reconstrucción en Hostinger.
+Fecha: 6 de noviembre de 2026. Estado: publicado en https://ruver-agricolas.com/ y verificado.
 
 El usuario confirmó que «reja» se refiere a los mismos productos agrícolas del catálogo. Se incorpora la intención de cubrir una reja con raschel, conservando los nombres técnicos, las 71 variantes y las URLs existentes. No se añade una oferta de cerramientos metálicos. La sustitución literal de todos los nombres de producto confundiría tejidos y usos distintos.
 
@@ -28,7 +28,11 @@ Las categorías de raschel y antimaleza añaden secciones de usos con enlaces di
 
 ## Activación y comprobación pública
 
-Usar el Compose existente, que compila GitHub main. Preservar imagen anterior, ejecutar build explícito y después up -d solo del servicio ruver. Validar las 23 URLs del sitemap, H1, canonical, enlaces internos, schema, bundle público, robots.txt y 404. Registrar resultado después de activar.
+Commit de aplicación: `6e1bb3a`, integrado por avance directo en main y enviado a GitHub. Compose existente confirmado con GitHub `#main`. Se conservó la imagen anterior como `ruver-ruver:pre-seo-20261106`. La reconstrucción explícita terminó correctamente en unos 22 segundos; `up -d ruver` inició el contenedor con la nueva imagen.
+
+Verificación pública: 23 URLs HTTP 200, H1 único, títulos distintos, canonical propio y JSON-LD válido. Las tres guías nuevas tienen fecha de publicación y modificación 06/11/2026. No se encontraron destinos internos inexistentes en los enlaces de esas 23 páginas; las tres guías reciben enlaces internos. Sitemap XML correcto, robots.txt en texto y ruta desconocida HTTP 404. Bundle público `/assets/index-BDlQxWYW.js` coincide con el build local.
+
+En navegador se confirmaron H1 y títulos de las tres guías sin errores de consola observados. La portada conserva sus metadatos comerciales tras ejecutar React y el blog público muestra 11 artículos, con los nuevos primero. Evidencia local: `output/seo-release-2026-11-06/publicacion-verificada.json` y `blog-publicado.png`. No se han medido velocidad, indexación ni posiciones como parte de estas comprobaciones.
 
 ## Seguimiento
 
