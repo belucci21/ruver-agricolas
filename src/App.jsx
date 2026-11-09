@@ -44,8 +44,8 @@ function setHead(meta, path) {
 }
 
 function CookieBanner({ decide }) {
-  return <aside className="cookie-banner" role="dialog" aria-modal="false" aria-label="Aviso de cookies" aria-live="polite">
-    <p><strong>Este sitio no usa cookies de seguimiento.</strong> Guardamos tu carrito y tu preferencia en el navegador. Puedes aceptar o rechazar las fuentes de Google; el almacenamiento del carrito sigue activo porque es necesario para el sitio. <a href="/cookies">Más información</a></p>
+  return <aside className="cookie-banner" aria-label="Aviso de cookies" aria-live="polite">
+    <p><strong>Este sitio no usa cookies de seguimiento.</strong> Guardamos tu carrito y tu preferencia en el navegador. Puedes aceptar o rechazar las fuentes de Google; el almacenamiento del carrito sigue activo porque es necesario para el sitio. <a href="/cookies">Consultar la política de cookies</a></p>
     <div className="cookie-actions">
       <button type="button" className="button button-green" onClick={() => decide('granted')}>Aceptar</button>
       <button type="button" className="button button-outline" onClick={() => decide('denied')}>Rechazar</button>
